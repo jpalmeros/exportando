@@ -2,10 +2,14 @@ package com.empresa.oscar.exportando;
 
 import com.empresa.oscar.exportando.util.*;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,9 +23,16 @@ import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 
 public class MainFullscreenActivity extends Activity {
+
+    private static final String TAG = "QR Scanner";
+    private Activity mActivity;
+    private Button mGetQRButton;
+    private TextView mQRCodeTextView;
+
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -57,6 +68,12 @@ public class MainFullscreenActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_my);
+
+        //para QR
+        mActivity = this;
+        mGetQRButton = (Button) findViewById(R.id.button_get_qr_code);
+        mQRCodeTextView = (TextView) findViewById(R.id.text_view_qr_content);
+        setupButton();
 
         displayed_login=false;
 
@@ -275,5 +292,33 @@ public class MainFullscreenActivity extends Activity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+//lee QR cuando termina
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if (scanResult != null) {
+            String scanContent = scanResult.getContents();
+            mQRCodeTextView.setText(scanContent);
+
+
+            //separamos cadena obtenida
+            String tmp[]=scanContent.split(":");
+            String usr=tmp[0];
+            String pass=tmp[0];
+            Log.d(TAG, "QR Scan :" + usr+" - "+ pass);
+            //logueando
+            new Login(MainFullscreenActivity.this,usr,pass).execute();
+        }
+    }
+    //abre QR reader
+    private void setupButton() {
+        mGetQRButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator integrator = new IntentIntegrator(mActivity);
+                integrator.initiateScan();
+            }
+        });
     }
 }
