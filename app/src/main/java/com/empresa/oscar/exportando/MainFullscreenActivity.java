@@ -299,8 +299,6 @@ public class MainFullscreenActivity extends Activity {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanResult != null) {
             String scanContent = scanResult.getContents();
-            mQRCodeTextView.setText(scanContent);
-
 
             //separamos cadena obtenida
             String tmp[]=scanContent.split(":");
@@ -309,6 +307,7 @@ public class MainFullscreenActivity extends Activity {
             Log.d(TAG, "QR Scan :" + usr+" - "+ pass);
             //logueando
             new Login(MainFullscreenActivity.this,usr,pass).execute();
+            mQRCodeTextView.setText("Hola: "+usr);
         }
     }
     //abre QR reader
