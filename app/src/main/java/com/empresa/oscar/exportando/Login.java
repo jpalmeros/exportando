@@ -124,7 +124,7 @@ public class Login extends AsyncTask<Void, Void, String> {
 
         }
         else{
-            Toast.makeText(context,"Ho"+nick+" Acceso no authorizado",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"Acceso no authorizado",Toast.LENGTH_SHORT).show();
         }
     }
 }
