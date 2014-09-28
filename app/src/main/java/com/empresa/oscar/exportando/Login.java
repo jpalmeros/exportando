@@ -3,6 +3,7 @@ package com.empresa.oscar.exportando;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -121,9 +122,20 @@ public class Login extends AsyncTask<Void, Void, String> {
         }
         progressDialog.dismiss();
         if(authorization.equals("granted")){
-
-
             Toast.makeText(context," Acceso authorizado a "+nick+"\n+"+type,Toast.LENGTH_SHORT).show();
+
+            if(type.equals("jefe-Almacen")){
+                Intent JefeAlmacen = new Intent(context, ActividadJefeAlmacen.class);
+                context.startActivity(JefeAlmacen);
+
+
+            }
+            if(type.equals("repartidor")){
+
+                Intent Repartidor = new Intent(context, ActividadRepartidor.class);
+                context.startActivity(Repartidor);
+
+            }
 
         }
         else{

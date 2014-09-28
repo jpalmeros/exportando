@@ -303,7 +303,7 @@ public class MainFullscreenActivity extends Activity {
             //separamos cadena obtenida
             String tmp[]=scanContent.split(":");
             String usr=tmp[0];
-            String pass=tmp[0];
+            String pass=tmp[1];
             Log.d(TAG, "QR Scan :" + usr+" - "+ pass);
             //logueando
             new Login(MainFullscreenActivity.this,usr,pass).execute();

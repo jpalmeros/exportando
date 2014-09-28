@@ -4,13 +4,14 @@
     <string name="app_name">exportando</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-
     <string name="login_button">Login</string>
     <string name="exit_button">Exit</string>
     <string name="ok_button">Ok</string>
     <string name="cancel_button">Cancel</string>
+    <string name="title_activity_actividad_repartidor">ActividadRepartidor</string>
+    <string name="title_activity_actividad_jefe_almacen">ActividadJefeAlmacen</string>
+    <string name="title_activity_actividadefe_almacen">ActividadefeAlmacen</string>
 
 </resources>
