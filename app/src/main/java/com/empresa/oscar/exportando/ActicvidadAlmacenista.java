@@ -6,54 +6,44 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 
-public class ActividadJefeAlmacen extends Activity {
+public class ActicvidadAlmacenista extends Activity {
     private static final String TAG = "QR Scanner";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_actividad_jefe_almacen);
+        setContentView(R.layout.activity_acticvidad_almacenista);
         readQR();
-
     }
 
     private void readQR() {
-                IntentIntegrator integrator = new IntentIntegrator(this);
-                integrator.initiateScan();
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.initiateScan();
     }
+
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanResult != null) {
             String scanContent = scanResult.getContents();
 
             //separamos cadena obtenida
-            String tmp[]=scanContent.split(" ");
-            String code_id=tmp[0];
-            String purchase_id=tmp[1];
-            String purchase_box=tmp[2];
-            String purchase_date=tmp[3];
-            Log.d(TAG, "QR Scan :" + purchase_id + " - " + purchase_box);
+            String tmp[]=scanContent.split(":");
+            String usr=tmp[0];
+            String pass=tmp[1];
+            Log.d(TAG, "QR Scan :" + usr + " - " + pass);
             //logueando
-            Intent StorageEntrance = new Intent(this,StorageEntrance.class);
-            StorageEntrance.putExtra("code_id",Integer.parseInt(code_id));
-            StorageEntrance.putExtra("purchase_id",Integer.parseInt(purchase_id));
-            StorageEntrance.putExtra("purchase_box",Integer.parseInt(purchase_box));
-            StorageEntrance.putExtra("code_value_serial",scanContent);
-
-            startActivity(StorageEntrance);
-            //new Login(this,usr,pass).execute();
+            new Login(this,usr,pass).execute();
 
         }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.actividad_jefe_almacen, menu);
+        getMenuInflater().inflate(R.menu.acticvidad_almacenista, menu);
         return true;
     }
 

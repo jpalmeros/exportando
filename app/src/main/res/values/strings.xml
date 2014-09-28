@@ -10,8 +10,23 @@
     <string name="exit_button">Exit</string>
     <string name="ok_button">Ok</string>
     <string name="cancel_button">Cancel</string>
+
+    <string name="Caja">Caja: </string>
+
+    <string name="Compra">Compra: </string>
+
+    <string name="storageEntranceButton">Registrar</string>
+
     <string name="title_activity_actividad_repartidor">ActividadRepartidor</string>
     <string name="title_activity_actividad_jefe_almacen">ActividadJefeAlmacen</string>
     <string name="title_activity_actividadefe_almacen">ActividadefeAlmacen</string>
+    <string name="title_activity_actividad_almacenista">ActividadAlmacenista</string>
+    <string name="title_activity_acticvidad_almacenista">ActicvidadAlmacenista</string>
+    <string name="title_activity_storage_entrance">StorageEntrance</string>
 
+    <color name="gray">#eaeaea</color>
+    <color name="Texto_2">#000</color>
+    <color name="Boton">#33b5e5</color>
+    <color name="Fondo">#ff1e63b5</color>
+    <color name="Texto_1">#FFF</color>
 </resources>
