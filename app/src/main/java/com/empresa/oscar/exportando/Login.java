@@ -35,6 +35,7 @@ public class Login extends AsyncTask<Void, Void, String> {
     private Activity context;
     boolean error;
     String tipo;
+    int id;
     String nick,pass,type,authorization;
 
 
@@ -85,12 +86,14 @@ public class Login extends AsyncTask<Void, Void, String> {
 
 
             type=  login_response.getString("type");
+            id=  login_response.getInt("employee_id");
             nick=  login_response.getString("employee");
             pass=  login_response.getString("password");
             authorization=  login_response.getString("authorization");
 
             SharedPreferences prefs = context.getSharedPreferences("Exporta",Activity.MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
+            editor.putInt("Id", id);
             editor.putString("Empleado", nick);
             editor.putString("Password", pass);
             editor.putString("Type", type);
