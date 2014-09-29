@@ -32,6 +32,17 @@
             tools:ignore="UselessParent">
 
             <Button
+                android:id="@+id/button_QRconLib"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_alignParentBottom="true"
+                android:background="#ff1f72ff"
+                android:textColor="#ff000000"
+                android:layout_marginBottom="150dp"
+                android:text="Leer QR con libreria" />
+
+            <Button
                 android:id="@+id/button_get_qr_code"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"

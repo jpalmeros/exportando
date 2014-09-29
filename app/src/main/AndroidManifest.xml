@@ -3,6 +3,7 @@
     package="com.empresa.oscar.exportando" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -37,6 +38,10 @@
         <activity
             android:name=".StorageEntrance"
             android:label="@string/title_activity_storage_entrance" >
+        </activity>
+        <activity
+            android:name=".LeerQR"
+            android:label="@string/title_activity_leer_qr" >
         </activity>
     </application>
 

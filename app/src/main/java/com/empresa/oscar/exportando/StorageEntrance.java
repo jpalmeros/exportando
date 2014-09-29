@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,11 +15,12 @@ import android.widget.TextView;
 
 public class StorageEntrance extends Activity {
     private TextView usuario,caja,compra;
-    private EditText amount;
+    private EditText cantidad;
     private Button registra;
     private SharedPreferences prefs;
     private int user_id;
     private String id_code_value,id_compra_value,caja_value,serial_value;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +29,7 @@ public class StorageEntrance extends Activity {
         usuario=(TextView)findViewById(R.id.user);
         compra=(TextView)findViewById(R.id.id_compra_value);
         caja=(TextView)findViewById(R.id.caja_value);
-        amount=(EditText)findViewById(R.id.amount);
+        cantidad=(EditText)findViewById(R.id.amount);
         registra=(Button)findViewById(R.id.postEntrance);
 
         final Bundle bundle = getIntent().getExtras();
@@ -44,10 +46,12 @@ public class StorageEntrance extends Activity {
         user_id = prefs.getInt("user_id", 0);
 
         registra.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-              int cantidad=Integer.parseInt(amount.getText().toString());
-                new PostStorageEntrance(StorageEntrance.this,Integer.parseInt(id_compra_value),Integer.parseInt(id_code_value),serial_value,user_id,cantidad);
+                Log.e("Hola","Soy Boton");
+              int num=Integer.parseInt(cantidad.getText().toString());
+              new PostStorageEntrance(StorageEntrance.this,Integer.parseInt(id_compra_value),Integer.parseInt(id_code_value),serial_value,user_id,num).execute();
 
             }
         });

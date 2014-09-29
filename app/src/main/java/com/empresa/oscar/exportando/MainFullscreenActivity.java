@@ -33,6 +33,7 @@ public class MainFullscreenActivity extends Activity {
     private Button mGetQRButton;
     private TextView mQRCodeTextView;
 
+    private Activity context;
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -59,7 +60,7 @@ public class MainFullscreenActivity extends Activity {
      */
     private com.empresa.oscar.exportando.util.SystemUiHider mSystemUiHider;
 
-    private Button login_button,exit_button;
+    private Button login_button,exit_button,otro_button;
     private EditText login_nick,login_password,temp_login_button;
     private Boolean displayed_login;
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -73,6 +74,16 @@ public class MainFullscreenActivity extends Activity {
         mActivity = this;
         mGetQRButton = (Button) findViewById(R.id.button_get_qr_code);
         mQRCodeTextView = (TextView) findViewById(R.id.text_view_qr_content);
+
+        otro_button = (Button) findViewById(R.id.button_QRconLib);
+        otro_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent leerqr = new Intent(MainFullscreenActivity.this, LeerQR.class);
+                MainFullscreenActivity.this.startActivity(leerqr);
+            }});
+
+
         setupButton();
 
         displayed_login=false;
