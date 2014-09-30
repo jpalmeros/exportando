@@ -125,15 +125,15 @@ public class Login extends AsyncTask<Void, Void, String> {
             Toast.makeText(context," Acceso authorizado a "+nick+"\n+"+type,Toast.LENGTH_SHORT).show();
 
             if(type.equals("jefe-Almacen")){
-                Intent JefeAlmacen = new Intent(context, ActividadJefeAlmacen.class);
-                context.startActivity(JefeAlmacen);
+                Intent QR_producto = new Intent(context, LeerQR_prodcuto.class);
+                context.startActivity(QR_producto);
 
 
             }
             if(type.equals("repartidor")){
 
-                Intent Repartidor = new Intent(context, ActividadRepartidor.class);
-                context.startActivity(Repartidor);
+                //Intent QR_repartidor = new Intent(context, LeerQR_repartidor.class);
+                //context.startActivity(QR_repartidor);
 
             }
 

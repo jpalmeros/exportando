@@ -14,8 +14,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
 
 public class MainFullscreenActivity extends Activity {
@@ -48,12 +46,11 @@ public class MainFullscreenActivity extends Activity {
         otro_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent leerqr = new Intent(MainFullscreenActivity.this, LeerQR.class);
+                Intent leerqr = new Intent(MainFullscreenActivity.this, LeerQR_login.class);
                 MainFullscreenActivity.this.startActivity(leerqr);
             }});
 
 
-        setupButton();
 
         displayed_login=false;
 
@@ -171,31 +168,4 @@ public class MainFullscreenActivity extends Activity {
 
 
 
-
-//lee QR cuando termina
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-        if (scanResult != null) {
-            String scanContent = scanResult.getContents();
-
-            //separamos cadena obtenida
-            String tmp[]=scanContent.split(":");
-            String usr=tmp[0];
-            String pass=tmp[1];
-            Log.d(TAG, "QR Scan :" + usr+" - "+ pass);
-            //logueando
-            new Login(MainFullscreenActivity.this,usr,pass).execute();
-            mQRCodeTextView.setText("Hola: "+usr);
-        }
-    }
-    //abre QR reader
-    private void setupButton() {
-        mGetQRButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentIntegrator integrator = new IntentIntegrator(mActivity);
-                integrator.initiateScan();
-            }
-        });
-    }
 }

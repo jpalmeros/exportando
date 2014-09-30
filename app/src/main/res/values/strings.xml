@@ -27,5 +27,6 @@
     <color name="Texto_1">#FFF</color>
 
     <string name="title_activity_leer_qr">LeerQR</string>
+    <string name="title_activity_leer_qr_prodcuto">LeerQR_prodcuto</string>
 
 </resources>

@@ -20,10 +20,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActividadRepartidor"
-            android:label="@string/title_activity_actividad_repartidor" >
-        </activity>
-        <activity
             android:name=".ActividadJefeAlmacen"
             android:label="@string/title_activity_actividad_jefe_almacen" >
         </activity>
@@ -40,8 +36,12 @@
             android:label="@string/title_activity_storage_entrance" >
         </activity>
         <activity
-            android:name=".LeerQR"
+            android:name=".LeerQR_login"
             android:label="@string/title_activity_leer_qr" >
+        </activity>
+        <activity
+            android:name=".LeerQR_prodcuto"
+            android:label="@string/title_activity_leer_qr_prodcuto" >
         </activity>
     </application>
 

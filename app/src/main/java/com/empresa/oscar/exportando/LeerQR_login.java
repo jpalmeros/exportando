@@ -7,8 +7,9 @@ import android.util.Log;
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
-public class LeerQR extends Activity implements ZBarScannerView.ResultHandler {
-        private ZBarScannerView mScannerView;
+public class LeerQR_login extends Activity implements ZBarScannerView.ResultHandler {
+    private ZBarScannerView mScannerView;
+
 
     @Override
     public void onCreate(Bundle state) {
@@ -34,7 +35,13 @@ public class LeerQR extends Activity implements ZBarScannerView.ResultHandler {
     @Override
     public void handleResult(Result rawResult) {
         // Do something with the result here
-        Log.v("QR", rawResult.getContents()); // Prints scan results
-        Log.v("QR", rawResult.getBarcodeFormat().getName()); // Prints the scan format (qrcode, pdf417 etc.)
+        //separamos cadena obtenida
+        String tmp[]=rawResult.getContents().split(":");
+        String usr=tmp[0];
+        String pass=tmp[1];
+        Log.d("QR", "QR Scan :" + usr+" - "+ pass);
+        //logueando
+        new Login(this,usr,pass).execute();
+      //  Log.v("QR", rawResult.getBarcodeFormat().getName()); // Prints the scan format (qrcode, pdf417 etc.)
     }
 }
