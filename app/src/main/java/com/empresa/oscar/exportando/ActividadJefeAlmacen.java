@@ -46,6 +46,7 @@ public class ActividadJefeAlmacen extends Activity {
             StorageEntrance.putExtra("code_value_serial",scanContent);
 
             startActivity(StorageEntrance);
+
             //new Login(this,usr,pass).execute();
 
         }
