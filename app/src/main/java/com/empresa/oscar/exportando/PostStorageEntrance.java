@@ -81,7 +81,7 @@ public class PostStorageEntrance extends AsyncTask<Void, Void, String> {
             nameValuePairs = new ArrayList<NameValuePair>(1);
             nameValuePairs.add(new BasicNameValuePair("nick", usr));
             nameValuePairs.add(new BasicNameValuePair("password", pass));
-            nameValuePairs.add(new BasicNameValuePair("storage_entrance_user_id", Integer.toString(user_id)));
+            nameValuePairs.add(new BasicNameValuePair("storage_employee_id", Integer.toString(user_id)));
             nameValuePairs.add(new BasicNameValuePair("storage_entrance_code_id", Integer.toString(code_id)));
             nameValuePairs.add(new BasicNameValuePair("storage_entrance_date", get_fecha()));
             nameValuePairs.add(new BasicNameValuePair("storage_entrance_amount", Integer.toString(amount)));

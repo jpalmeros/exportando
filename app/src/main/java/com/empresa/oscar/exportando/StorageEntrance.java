@@ -19,7 +19,7 @@ public class StorageEntrance extends Activity {
     private Button registra;
     private SharedPreferences prefs;
     private int user_id;
-    private String id_code_value,id_compra_value,caja_value,serial_value;
+    private String id_code_value,id_compra_value,caja_value,serial_value,user_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,19 +39,23 @@ public class StorageEntrance extends Activity {
         caja_value = Integer.toString(bundle.getInt("purchase_box"));
         serial_value = bundle.getString("code_value_serial");
 
+
         serial.setText(serial_value);
         caja.setText(caja_value);
         compra.setText(id_compra_value);
 
 
         prefs = getSharedPreferences("Exporta", Context.MODE_PRIVATE);
-        user_id = prefs.getInt("user_id", 0);
+
+        user_id = prefs.getInt("Id", 0);
+        user_name = prefs.getString("Empleado", null);
+        usuario.setText(user_name);
 
         registra.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Log.e("Hola","Soy Boton");
+                Log.e("Hola", String.valueOf(user_id));
               int num=Integer.parseInt(cantidad.getText().toString());
               new PostStorageEntrance(StorageEntrance.this,Integer.parseInt(id_compra_value),Integer.parseInt(id_code_value),serial_value,user_id,num).execute();
 

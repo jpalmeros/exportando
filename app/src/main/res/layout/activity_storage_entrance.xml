@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/Texto_1"
         android:layout_centerHorizontal="true"
+        android:text="@string/app_name"
         android:textSize="32dp"
         android:textStyle="bold"
         android:layout_below="@id/title"
@@ -103,13 +104,14 @@
 
         <TextView
             android:id="@+id/serial_value"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/Texto_1"
-            android:textSize="19dp"
-            android:layout_marginTop="19dp"
+            android:textSize="12dp"
+            android:layout_marginTop="24dp"
             android:layout_toRightOf="@id/serial"
-            android:textStyle="bold"/>
+            android:textStyle="normal"/>
     </RelativeLayout>
     <EditText
         android:id="@+id/amount"
