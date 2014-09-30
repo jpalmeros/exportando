@@ -34,6 +34,7 @@ public class LeerQR_login extends Activity implements ZBarScannerView.ResultHand
 
     @Override
     public void handleResult(Result rawResult) {
+        super.onPause();
         // Do something with the result here
         //separamos cadena obtenida
         String tmp[]=rawResult.getContents().split(":");

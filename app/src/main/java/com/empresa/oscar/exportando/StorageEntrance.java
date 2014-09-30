@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 
 public class StorageEntrance extends Activity {
-    private TextView usuario,caja,compra;
+    private TextView usuario,caja,compra,serial;
     private EditText cantidad;
     private Button registra;
     private SharedPreferences prefs;
@@ -30,6 +30,7 @@ public class StorageEntrance extends Activity {
         compra=(TextView)findViewById(R.id.id_compra_value);
         caja=(TextView)findViewById(R.id.caja_value);
         cantidad=(EditText)findViewById(R.id.amount);
+        serial=(TextView)findViewById(R.id.serial_value);
         registra=(Button)findViewById(R.id.postEntrance);
 
         final Bundle bundle = getIntent().getExtras();
@@ -38,6 +39,7 @@ public class StorageEntrance extends Activity {
         caja_value = Integer.toString(bundle.getInt("purchase_box"));
         serial_value = bundle.getString("code_value_serial");
 
+        serial.setText(serial_value);
         caja.setText(caja_value);
         compra.setText(id_compra_value);
 

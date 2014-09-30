@@ -35,6 +35,7 @@
     android:layout_below="@id/user"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="20dp">
+
     <TextView
         android:id="@+id/id_compra"
         android:text="@string/Compra"
@@ -84,20 +85,45 @@
         android:layout_toRightOf="@id/caja"
         android:textStyle="bold"/>
 </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/Serial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/valuesCaja"
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:id="@+id/serial"
+            android:text="@string/Serial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Texto_1"
+            android:textSize="28dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"/>
 
+        <TextView
+            android:id="@+id/serial_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Texto_1"
+            android:textSize="19dp"
+            android:layout_marginTop="19dp"
+            android:layout_toRightOf="@id/serial"
+            android:textStyle="bold"/>
+    </RelativeLayout>
     <EditText
         android:id="@+id/amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/Texto_2"
         android:textSize="28dp"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/valuesCaja"
         android:background="@color/Texto_1"
         android:padding="5dp"
         android:width="200dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/postEntrance"
+        android:layout_alignStart="@+id/postEntrance" />
 
     <Button
         android:id="@+id/postEntrance"
@@ -106,13 +132,12 @@
         android:textColor="@color/Texto_1"
         android:textSize="25dp"
         android:text="@string/storageEntranceButton"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/amount"
         android:background="@color/Boton"
         android:padding="12dp"
         android:width="200dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:layout_above="@+id/amount"
+        android:layout_centerHorizontal="true" />
 
 
 

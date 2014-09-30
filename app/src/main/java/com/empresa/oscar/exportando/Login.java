@@ -126,6 +126,8 @@ public class Login extends AsyncTask<Void, Void, String> {
 
             if(type.equals("jefe-Almacen")){
                 Intent QR_producto = new Intent(context, LeerQR_prodcuto.class);
+                QR_producto.putExtra("nick",nick);
+                QR_producto.putExtra("pass",pass);
                 context.startActivity(QR_producto);
 
 

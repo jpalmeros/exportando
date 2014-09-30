@@ -21,7 +21,11 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -66,17 +70,23 @@ public class PostStorageEntrance extends AsyncTask<Void, Void, String> {
         String aux;
         JSONObject jsonObject;
 
+        SharedPreferences prefs = context.getSharedPreferences("Exporta",Activity.MODE_PRIVATE);
+        String usr=prefs.getString("Empleado",null);
+        String pass=prefs.getString("Password",null);
 
         //post para obtener los dominios
         try {
             httpClient = new DefaultHttpClient();
             httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/primer_registro.php");
             nameValuePairs = new ArrayList<NameValuePair>(1);
+            nameValuePairs.add(new BasicNameValuePair("nick", usr));
+            nameValuePairs.add(new BasicNameValuePair("password", pass));
             nameValuePairs.add(new BasicNameValuePair("storage_entrance_user_id", Integer.toString(user_id)));
             nameValuePairs.add(new BasicNameValuePair("storage_entrance_code_id", Integer.toString(code_id)));
+            nameValuePairs.add(new BasicNameValuePair("storage_entrance_date", get_fecha()));
+            nameValuePairs.add(new BasicNameValuePair("storage_entrance_amount", Integer.toString(amount)));
             nameValuePairs.add(new BasicNameValuePair("code_purchase_id", Integer.toString(purchase_id)));
             nameValuePairs.add(new BasicNameValuePair("code_value_serial", serial));
-            nameValuePairs.add(new BasicNameValuePair("storage_entrance_amount", Integer.toString(amount)));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             responseHandler = new BasicResponseHandler();
             response = httpClient.execute(httpPost, responseHandler);
@@ -87,7 +97,7 @@ public class PostStorageEntrance extends AsyncTask<Void, Void, String> {
             } else {
                 Log.e("Registro de almacen","fallo el Registro");
             }
-
+            Log.e("Toda la respuesta",aux);
             jsonObject = new JSONObject(aux);
             Log.e("Response",jsonObject.toString());
             JSONObject login_response = jsonObject.getJSONObject("response");
@@ -124,4 +134,11 @@ public class PostStorageEntrance extends AsyncTask<Void, Void, String> {
             Toast.makeText(context,"Error al registrar la entrada",Toast.LENGTH_SHORT).show();
         }
     }
+    private String get_fecha(){
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+        Date now = new Date();
+        String strDate = sdfDate.format(now);
+        Log.d("fecha",strDate);
+        return strDate;
+        }
 }
