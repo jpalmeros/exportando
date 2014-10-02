@@ -18,7 +18,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -130,6 +129,13 @@ public class Login extends AsyncTask<Void, Void, String> {
                 QR_producto.putExtra("pass",pass);
                 context.startActivity(QR_producto);
 
+
+            }
+            if(type.equals("almacenista")){
+                Intent Storage_activity = new Intent(context, StorageActivity.class);
+                Storage_activity.putExtra("nick",nick);
+                Storage_activity.putExtra("pass",pass);
+                context.startActivity(Storage_activity);
 
             }
             if(type.equals("repartidor")){

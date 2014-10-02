@@ -43,6 +43,10 @@
             android:name=".LeerQR_prodcuto"
             android:label="@string/title_activity_leer_qr_prodcuto" >
         </activity>
+        <activity
+            android:name=".StorageActivity"
+            android:label="@string/title_activity_storage" >
+        </activity>
     </application>
 
 </manifest>
