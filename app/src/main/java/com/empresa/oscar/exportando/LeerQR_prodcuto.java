@@ -13,10 +13,16 @@ import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
 public class LeerQR_prodcuto extends Activity implements ZBarScannerView.ResultHandler {
     private ZBarScannerView mScannerView;
-
+    private String nick,pass,type,process;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final Bundle bundle = getIntent().getExtras();
+        nick= bundle.getString("nick");
+        pass= bundle.getString("pass");
+        type = bundle.getString("type");
+        process = bundle.getString("process");
+
         mScannerView = new ZBarScannerView(this);    // Programmatically initialize the scanner view
         setContentView(mScannerView);                // Set the scanner view as the content view
     }
@@ -48,15 +54,31 @@ public class LeerQR_prodcuto extends Activity implements ZBarScannerView.ResultH
             String purchase_date=tmp[3];
             Log.d("QR", purchase_id + " - " + purchase_box);
             //logueando
+
+            if(process.equals("primer-registro")){
             Intent StorageEntrance = new Intent(this,StorageEntrance.class);
             StorageEntrance.putExtra("code_id",Integer.parseInt(code_id));
             StorageEntrance.putExtra("purchase_id",Integer.parseInt(purchase_id));
             StorageEntrance.putExtra("purchase_box",Integer.parseInt(purchase_box));
             StorageEntrance.putExtra("code_value_serial",scanContent);
-
-
             startActivity(StorageEntrance);
-
+            }
+            if(process.equals("entrega")){
+                Intent  Delivery= new Intent(this,ProductDelivery.class);
+                Delivery.putExtra("code_id",Integer.parseInt(code_id));
+                Delivery.putExtra("purchase_id",Integer.parseInt(purchase_id));
+                Delivery.putExtra("purchase_box",Integer.parseInt(purchase_box));
+                Delivery.putExtra("code_value_serial",scanContent);
+                startActivity(Delivery);
+            }
+            if(process.equals("recepcion")){
+                Intent  Reception= new Intent(this,ProductReception.class);
+                Reception.putExtra("code_id",Integer.parseInt(code_id));
+                Reception.putExtra("purchase_id",Integer.parseInt(purchase_id));
+                Reception.putExtra("purchase_box",Integer.parseInt(purchase_box));
+                Reception.putExtra("code_value_serial",scanContent);
+                startActivity(Reception);
+            }
             //new Login(this,usr,pass).execute();
 
     }

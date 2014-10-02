@@ -127,6 +127,8 @@ public class Login extends AsyncTask<Void, Void, String> {
                 Intent QR_producto = new Intent(context, LeerQR_prodcuto.class);
                 QR_producto.putExtra("nick",nick);
                 QR_producto.putExtra("pass",pass);
+                QR_producto.putExtra("type",type);
+                QR_producto.putExtra("process","primer-registro");
                 context.startActivity(QR_producto);
 
 
@@ -135,13 +137,17 @@ public class Login extends AsyncTask<Void, Void, String> {
                 Intent Storage_activity = new Intent(context, StorageActivity.class);
                 Storage_activity.putExtra("nick",nick);
                 Storage_activity.putExtra("pass",pass);
+                Storage_activity.putExtra("type",type);
                 context.startActivity(Storage_activity);
 
             }
             if(type.equals("repartidor")){
 
-                //Intent QR_repartidor = new Intent(context, LeerQR_repartidor.class);
-                //context.startActivity(QR_repartidor);
+                Intent Storage_activity = new Intent(context, StorageActivity.class);
+                Storage_activity.putExtra("nick",nick);
+                Storage_activity.putExtra("pass",pass);
+                Storage_activity.putExtra("type",type);
+                context.startActivity(Storage_activity);
 
             }
 

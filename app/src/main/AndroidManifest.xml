@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainFullscreenActivity"
+            android:name="com.empresa.oscar.exportando.MainFullscreenActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,32 +20,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActividadJefeAlmacen"
+            android:name="com.empresa.oscar.exportando.ActividadJefeAlmacen"
             android:label="@string/title_activity_actividad_jefe_almacen" >
         </activity>
         <activity
-            android:name=".util.ActividadAlmacenista"
+            android:name="com.empresa.oscar.exportando.util.ActividadAlmacenista"
             android:label="@string/title_activity_actividad_almacenista" >
         </activity>
         <activity
-            android:name=".ActicvidadAlmacenista"
+            android:name="com.empresa.oscar.exportando.ActicvidadAlmacenista"
             android:label="@string/title_activity_acticvidad_almacenista" >
         </activity>
         <activity
-            android:name=".StorageEntrance"
+            android:name="com.empresa.oscar.exportando.StorageEntrance"
             android:label="@string/title_activity_storage_entrance" >
         </activity>
         <activity
-            android:name=".LeerQR_login"
+            android:name="com.empresa.oscar.exportando.LeerQR_login"
             android:label="@string/title_activity_leer_qr" >
         </activity>
         <activity
-            android:name=".LeerQR_prodcuto"
+            android:name="com.empresa.oscar.exportando.LeerQR_prodcuto"
             android:label="@string/title_activity_leer_qr_prodcuto" >
         </activity>
         <activity
-            android:name=".StorageActivity"
+            android:name="com.empresa.oscar.exportando.StorageActivity"
             android:label="@string/title_activity_storage" >
+        </activity>
+        <activity
+            android:name="com.empresa.oscar.exportando.ProductDelivery"
+            android:label="@string/title_activity_product_delivery" >
+        </activity>
+        <activity
+            android:name="com.empresa.oscar.exportando.ProductReception"
+            android:label="@string/title_activity_product_reception" >
         </activity>
     </application>
 

@@ -1,20 +1,55 @@
 package com.empresa.oscar.exportando;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
 
 public class StorageActivity extends Activity {
     private Button entrega_button,recepcion_button;
+    private String nick,pass,type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_storage);
+
         entrega_button=(Button)findViewById(R.id.entrega);
         recepcion_button=(Button)findViewById(R.id.recepcion);
+
+        SharedPreferences prefs = getSharedPreferences("Exporta",Activity.MODE_PRIVATE);
+        nick=prefs.getString("Empleado",null);
+        pass=prefs.getString("Password",null);
+        type=prefs.getString("Type",null);
+
+        entrega_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent QR_producto = new Intent(StorageActivity.this, LeerQR_prodcuto.class);
+                QR_producto.putExtra("nick",nick);
+                QR_producto.putExtra("pass",pass);
+                QR_producto.putExtra("type",type);
+                QR_producto.putExtra("process","entrega");
+                startActivity(QR_producto);
+
+            }
+        });
+
+        recepcion_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent QR_producto = new Intent(StorageActivity.this, LeerQR_prodcuto.class);
+                QR_producto.putExtra("nick",nick);
+                QR_producto.putExtra("pass",pass);
+                QR_producto.putExtra("type",type);
+                QR_producto.putExtra("process","recepcion");
+                startActivity(QR_producto);
+            }
+        });
     }
 
 

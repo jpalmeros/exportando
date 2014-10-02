@@ -32,5 +32,7 @@
     <string name="title_activity_leer_qr">LeerQR</string>
     <string name="title_activity_leer_qr_prodcuto">LeerQR_prodcuto</string>
     <string name="title_activity_storage">StorageActivity</string>
+    <string name="title_activity_product_delivery">ProductDelivery</string>
+    <string name="title_activity_product_reception">ProductReception</string>
 
 </resources>
