@@ -40,10 +40,11 @@ public class GetLocations extends AsyncTask<Void, Void, ArrayList> {
     String nick,pass,type,authorization;
 
 
-    GetLocations(Activity context,String nick,String pass) {
+    GetLocations(Activity context,String nick,String pass,int id) {
         this.context = context;
         this.nick=nick;
         this.pass=pass;
+        this.id=id;
     }
 
     protected void onPreExecute() {
@@ -64,8 +65,9 @@ public class GetLocations extends AsyncTask<Void, Void, ArrayList> {
             httpClient = new DefaultHttpClient();
             httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/getLocations.php");
             nameValuePairs = new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("nick", nick));
-            nameValuePairs.add(new BasicNameValuePair("password", pass));
+            nameValuePairs.add(new BasicNameValuePair("employee_nickname", nick));
+            nameValuePairs.add(new BasicNameValuePair("employee_password", pass));
+            nameValuePairs.add(new BasicNameValuePair("employee_id", Integer.toString(id)));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             responseHandler = new BasicResponseHandler();
             response = httpClient.execute(httpPost, responseHandler);
