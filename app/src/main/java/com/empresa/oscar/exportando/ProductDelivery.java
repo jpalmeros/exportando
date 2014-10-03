@@ -34,12 +34,13 @@ public class ProductDelivery extends Activity {
         SharedPreferences prefs = getSharedPreferences("Exporta", Activity.MODE_PRIVATE);
         String usr=prefs.getString("Empleado",null);
         String pass=prefs.getString("Password",null);
+        int id=prefs.getInt("Id",0);
 
         caja.setText(caja_value);
         compra.setText(id_compra_value);
 
         try {
-            ListaLocaciones=new GetLocations(this,usr,pass).execute().get();
+            ListaLocaciones=new GetLocations(this,usr,pass,id).execute().get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
