@@ -85,7 +85,7 @@ public class GetLocations extends AsyncTask<Void, Void, ArrayList> {
 
             for (int i = 0; i < locaciones.length(); i++) {
                 JSONObject evobject = locaciones.getJSONObject(i);
-                listaLocaciones.add(new Locacion(evobject.getInt("locacion_id"),evobject.getString("locacion_name")));
+                listaLocaciones.add(new Locacion(evobject.getInt("location_id"),evobject.getString("location_name")));
             }
 
         } catch (Exception ex) {
