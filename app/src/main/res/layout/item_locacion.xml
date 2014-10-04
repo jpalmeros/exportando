@@ -8,6 +8,6 @@
         android:id="@+id/item_locacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="32sp"
+        android:textSize="24sp"
         android:textColor="@color/Texto_1"/>
 </RelativeLayout>
