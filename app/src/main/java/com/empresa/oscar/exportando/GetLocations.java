@@ -60,7 +60,7 @@ public class GetLocations extends AsyncTask<Void, Void, ArrayList> {
     protected ArrayList doInBackground(Void... arg0) {
         String response;
         String aux;
-
+        listaLocaciones=new ArrayList<Locacion>();
         try {
             httpClient = new DefaultHttpClient();
             httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/getLocations.php");
