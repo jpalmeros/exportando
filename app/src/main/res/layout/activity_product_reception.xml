@@ -89,45 +89,53 @@
         android:gravity="top"
         android:padding="20dp"
         android:layout_weight="3">
-        <Button
-            android:id="@+id/recepcion"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:textStyle="bold"
-            android:textColor="@color/Texto_1"
-            android:textSize="25sp"
-            android:text="@string/Recepcion"
-            android:background="@color/Boton"
-            android:layout_marginBottom="10dp"/>
         <TextView
             android:id="@+id/amount_header"
             android:text="@string/Cantidad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/Texto_1"
-            android:layout_gravity="center"
-            android:textSize="32dp"
-            android:layout_weight="2"
+            android:layout_gravity="left"
+            android:textSize="28dp"
             android:textStyle="bold"
             android:layout_marginBottom="10dp"/>
-        <EditText
-            android:id="@+id/amount"
-            android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/Texto_2"
-            android:textSize="28sp"
-            android:background="@color/Texto_1"
-            android:padding="5dp"
-            android:width="200dp"
-            android:textStyle="bold"
-            android:layout_weight="2"
-            android:layout_marginBottom="10dp"
-            />
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/amount"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Texto_2"
+                android:textSize="28sp"
+                android:background="@color/Texto_1"
+                android:padding="5dp"
+                android:width="200dp"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                />
+            <Button
+                android:id="@+id/recepcion"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textStyle="bold"
+                android:textColor="@color/Texto_1"
+                android:textSize="18sp"
+                android:text="@string/Recepcion"
+                android:background="@color/Boton"
+                />
+            </LinearLayout>
+
         <Spinner
             android:id="@+id/spinner1"
             android:layout_width="match_parent"
-            android:layout_weight="1"
+
             android:layout_height="wrap_content"
             android:background="@color/Boton"
             android:layout_marginBottom="10dp"
