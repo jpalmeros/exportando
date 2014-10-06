@@ -3,8 +3,12 @@ package com.empresa.oscar.exportando;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -14,33 +18,41 @@ import java.util.concurrent.ExecutionException;
 
 public class ProductDelivery extends Activity {
     private ArrayList<Locacion> ListaLocaciones;
-    private String id_compra_value,caja_value,id_code_value;
+    private int user_id,id_compra_value,caja_value,id_code_value;
     private TextView compra,caja;
+    private String code_value_serial,pass,usr;
     private locacionAdapter locAdapter;
     private Spinner locSpinner;
+    private Button boton_recepcion;
+    private EditText texto_amount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_delivery);
         compra=(TextView)findViewById(R.id.id_compra_value);
         caja=(TextView)findViewById(R.id.caja_value);
+        boton_recepcion=(Button)findViewById(R.id.recepcion);
+        texto_amount=(EditText)findViewById(R.id.amount);
+
 
         final Bundle bundle = getIntent().getExtras();
-        id_code_value= Integer.toString(bundle.getInt("code_id"));
-        id_compra_value= Integer.toString(bundle.getInt("purchase_id"));
-        caja_value = Integer.toString(bundle.getInt("purchase_box"));
+        id_code_value= bundle.getInt("code_id");
+        id_compra_value= bundle.getInt("purchase_id");
+        caja_value = bundle.getInt("purchase_box");
+        code_value_serial = bundle.getString("code_value_serial");
 
 
         SharedPreferences prefs = getSharedPreferences("Exporta", Activity.MODE_PRIVATE);
-        String usr=prefs.getString("Empleado",null);
-        String pass=prefs.getString("Password",null);
-        int id=prefs.getInt("Id",0);
+        usr=prefs.getString("Empleado",null);
+        pass=prefs.getString("Password",null);
+        user_id=prefs.getInt("Id",0);
 
         caja.setText(caja_value);
         compra.setText(id_compra_value);
 
         try {
-            ListaLocaciones=new GetLocations(this,usr,pass,id).execute().get();
+            ListaLocaciones=new GetLocations(this,usr,pass,user_id).execute().get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -50,6 +62,23 @@ public class ProductDelivery extends Activity {
         locAdapter = new locacionAdapter(this, ListaLocaciones);
         locSpinner = (Spinner) findViewById(R.id.spinner1);
         locSpinner.setAdapter(locAdapter);
+
+        boton_recepcion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String cadena_amount = texto_amount.getText().toString();
+
+                if(TextUtils.isEmpty(cadena_amount)){
+                    texto_amount.setError("Debes ingresar un valor adecuado");
+                    return;
+                }
+                else{
+                    Locacion loc=(Locacion)locSpinner.getSelectedItem();
+                    int int_amount=Integer.parseInt(cadena_amount);
+                    new PostStorageDelivery(ProductDelivery.this,id_compra_value,id_code_value,code_value_serial,user_id,int_amount,loc.getIndiceLocacion()).execute();
+                }
+            }
+        });
 
     }
 

@@ -112,6 +112,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/Texto_2"
                 android:textSize="28sp"
+                android:inputType="number"
                 android:background="@color/Texto_1"
                 android:padding="5dp"
                 android:width="200dp"

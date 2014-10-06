@@ -24,6 +24,7 @@
             android:textColor="@color/Texto_1"
             android:layout_centerHorizontal="true"
             android:textSize="42dp"
+            android:inputType="number"
             android:textStyle="bold"
             android:layout_marginTop="40dp"/>
         <RelativeLayout
