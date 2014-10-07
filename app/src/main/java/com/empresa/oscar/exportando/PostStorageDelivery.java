@@ -77,7 +77,7 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
         //post para obtener los dominios
         try {
             httpClient = new DefaultHttpClient();
-            httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/entrega.php");
+            httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/postDelivery.php");
             nameValuePairs = new ArrayList<NameValuePair>(1);
             nameValuePairs.add(new BasicNameValuePair("employee_nickname", usr));
             nameValuePairs.add(new BasicNameValuePair("employee_password", pass));

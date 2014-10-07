@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,14 +46,15 @@ public class ProductDelivery extends Activity {
         caja_value = bundle.getInt("purchase_box");
         code_value_serial = bundle.getString("code_value_serial");
 
+        Log.e("sacando valores",id_code_value+"-"+id_compra_value+"-"+caja_value+"-"+code_value_serial);
 
         SharedPreferences prefs = getSharedPreferences("Exporta", Activity.MODE_PRIVATE);
         usr=prefs.getString("Empleado",null);
         pass=prefs.getString("Password",null);
-        user_id=prefs.getInt("Id",0);
+        user_id= prefs.getInt("Id",0);
 
-        caja.setText(caja_value);
-        compra.setText(id_compra_value);
+        caja.setText(String.valueOf(caja_value));
+        compra.setText(String.valueOf(id_compra_value));
 
         try {
             ListaLocaciones=new GetLocations(this,usr,pass,user_id).execute().get();
