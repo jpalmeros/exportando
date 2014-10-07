@@ -34,14 +34,14 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
     private List<NameValuePair> nameValuePairs;
     private ResponseHandler<String> responseHandler;
     private Activity context;
-    boolean error;
+    private boolean error,full,empty;
     private String serial, success, status;
     private int purchase_id, code_id, amount, user_id;
     int id,location_id;
     String nick, pass, type, authorization;
 
 
-    PostStorageDelivery(Activity context, int purchase_id, int code_id, String serial, int user_id, int amount,int location_id) {
+    PostStorageDelivery(Activity context, int purchase_id, int code_id, String serial, int user_id, int amount,int location_id,boolean full,boolean empty) {
         this.context = context;
         this.purchase_id = purchase_id;
         this.code_id = code_id;
@@ -49,6 +49,8 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
         this.serial = serial;
         this.amount = amount;
         this.location_id=location_id;
+        this.full=full;
+        this.empty=empty;
 
     }
 
@@ -71,19 +73,22 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
         String usr = prefs.getString("Empleado", null);
         String pass = prefs.getString("Password", null);
 
+
         //post para obtener los dominios
         try {
             httpClient = new DefaultHttpClient();
             httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/entrega.php");
             nameValuePairs = new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("nick", usr));
-            nameValuePairs.add(new BasicNameValuePair("password", pass));
-            nameValuePairs.add(new BasicNameValuePair("storage_employee_id", Integer.toString(user_id)));
-            nameValuePairs.add(new BasicNameValuePair("storage_entrance_code_id", Integer.toString(code_id)));
-            nameValuePairs.add(new BasicNameValuePair("storage_entrance_date", get_fecha()));
-            nameValuePairs.add(new BasicNameValuePair("storage_entrance_amount", Integer.toString(amount)));
-            nameValuePairs.add(new BasicNameValuePair("location_id", Integer.toString(location_id)));
-            nameValuePairs.add(new BasicNameValuePair("code_purchase_id", Integer.toString(purchase_id)));
+            nameValuePairs.add(new BasicNameValuePair("employee_nickname", usr));
+            nameValuePairs.add(new BasicNameValuePair("employee_password", pass));
+            nameValuePairs.add(new BasicNameValuePair("employee_id", Integer.toString(user_id)));
+            nameValuePairs.add(new BasicNameValuePair("delivery_code_id", Integer.toString(code_id)));
+            nameValuePairs.add(new BasicNameValuePair("delivery_date", get_fecha()));
+            nameValuePairs.add(new BasicNameValuePair("delivery_amount", Integer.toString(amount)));
+            nameValuePairs.add(new BasicNameValuePair("delivery_location_id", Integer.toString(location_id)));
+            nameValuePairs.add(new BasicNameValuePair("delivery_purchase_id", Integer.toString(purchase_id)));
+            nameValuePairs.add(new BasicNameValuePair("delivery_full", Boolean.toString(full)));
+            nameValuePairs.add(new BasicNameValuePair("delivery_empty", Boolean.toString(empty)));
             nameValuePairs.add(new BasicNameValuePair("code_value_serial", serial));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             responseHandler = new BasicResponseHandler();

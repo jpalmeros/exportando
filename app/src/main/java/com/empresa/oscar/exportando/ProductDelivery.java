@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,7 +26,7 @@ public class ProductDelivery extends Activity {
     private Spinner locSpinner;
     private Button boton_recepcion;
     private EditText texto_amount;
-
+    private CheckBox full;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,8 @@ public class ProductDelivery extends Activity {
         caja=(TextView)findViewById(R.id.caja_value);
         boton_recepcion=(Button)findViewById(R.id.recepcion);
         texto_amount=(EditText)findViewById(R.id.amount);
+
+        full = (CheckBox) findViewById(R.id.lleno);
 
 
         final Bundle bundle = getIntent().getExtras();
@@ -68,14 +71,22 @@ public class ProductDelivery extends Activity {
             public void onClick(View view) {
                 String cadena_amount = texto_amount.getText().toString();
 
-                if(TextUtils.isEmpty(cadena_amount)){
+                if (TextUtils.isEmpty(cadena_amount)) {
                     texto_amount.setError("Debes ingresar un valor adecuado");
                     return;
-                }
-                else{
-                    Locacion loc=(Locacion)locSpinner.getSelectedItem();
-                    int int_amount=Integer.parseInt(cadena_amount);
-                    new PostStorageDelivery(ProductDelivery.this,id_compra_value,id_code_value,code_value_serial,user_id,int_amount,loc.getIndiceLocacion()).execute();
+                } else {
+                    boolean lleno,vacio;
+                    if (full.isChecked()) {
+                     lleno=true;
+                     vacio=false;
+                    }
+                    else{
+                        lleno=false;
+                        vacio=true;
+                    }
+                    Locacion loc = (Locacion) locSpinner.getSelectedItem();
+                    int int_amount = Integer.parseInt(cadena_amount);
+                    new PostStorageDelivery(ProductDelivery.this, id_compra_value, id_code_value, code_value_serial, user_id, int_amount, loc.getIndiceLocacion(),lleno,vacio).execute();
                 }
             }
         });

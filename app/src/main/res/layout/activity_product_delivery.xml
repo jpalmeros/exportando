@@ -141,8 +141,37 @@
             android:background="@color/Boton"
             android:layout_marginBottom="10dp"
             />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
 
+        <CheckBox
+            android:id="@+id/lleno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/Texto_1"
+            android:gravity="right"
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentRight="true"/>
+            <TextView
+                android:id="@+id/lleno_header"
+                android:text="@string/Lleno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Texto_1"
+                android:layout_gravity="left"
+                android:textSize="28dp"
+                android:gravity="end"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_toLeftOf="@id/lleno"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"/>
 
+    </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>

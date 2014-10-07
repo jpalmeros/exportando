@@ -14,6 +14,7 @@
     <string name="Compra">Compra: </string>
     <string name="Serial">Serial: </string>
     <string name="Entrega">Entrega </string>
+    <string name="Lleno">Lleno: </string>
     <string name="Cantidad">Cantidad: </string>
     <string name="Recepcion">Recepción </string>
     <string name="storageEntranceButton">Registrar</string>
