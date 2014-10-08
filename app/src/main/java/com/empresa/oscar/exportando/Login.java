@@ -105,11 +105,6 @@ public class Login extends AsyncTask<Void, Void, String> {
         } catch (Exception ex) {
             error = true;
             Log.e("error",ex.toString());
-            try {
-                finalize();
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
             return null;
         }
         return authorization;
@@ -131,41 +126,48 @@ public class Login extends AsyncTask<Void, Void, String> {
             }
         }
         progressDialog.dismiss();
-        if(authorization.equals("granted")){
-            Toast.makeText(context," Acceso authorizado a "+nick+"\n+"+type,Toast.LENGTH_SHORT).show();
+        if(authorization!=null){
+            if(authorization.equals("granted")){
+                Toast.makeText(context," Acceso authorizado a "+nick+"\n+"+type,Toast.LENGTH_SHORT).show();
 
-            if(type.equals("jefe-Almacen")){
-                Intent QR_producto = new Intent(context, LeerQR_prodcuto.class);
-                QR_producto.putExtra("nick",nick);
-                QR_producto.putExtra("pass",pass);
-                QR_producto.putExtra("type",type);
-                QR_producto.putExtra("process","primer-registro");
-                context.startActivity(QR_producto);
+                if(type.equals("jefe-Almacen")){
+                    Intent QR_producto = new Intent(context, LeerQR_prodcuto.class);
+                    QR_producto.putExtra("nick",nick);
+                    QR_producto.putExtra("pass",pass);
+                    QR_producto.putExtra("type",type);
+                    QR_producto.putExtra("process","primer-registro");
+                    context.startActivity(QR_producto);
 
+
+                }
+                if(type.equals("almacenista")){
+                    Intent Storage_activity = new Intent(context, StorageActivity.class);
+                    Storage_activity.putExtra("nick",nick);
+                    Storage_activity.putExtra("pass",pass);
+                    Storage_activity.putExtra("type",type);
+                    context.startActivity(Storage_activity);
+
+                }
+                if(type.equals("repartidor")){
+
+                    Intent Storage_activity = new Intent(context, StorageActivity.class);
+                    Storage_activity.putExtra("nick",nick);
+                    Storage_activity.putExtra("pass",pass);
+                    Storage_activity.putExtra("type",type);
+                    context.startActivity(Storage_activity);
+
+                }
 
             }
-            if(type.equals("almacenista")){
-                Intent Storage_activity = new Intent(context, StorageActivity.class);
-                Storage_activity.putExtra("nick",nick);
-                Storage_activity.putExtra("pass",pass);
-                Storage_activity.putExtra("type",type);
-                context.startActivity(Storage_activity);
-
+            else{
+                Toast.makeText(context,"Acceso no authorizado",Toast.LENGTH_SHORT).show();
             }
-            if(type.equals("repartidor")){
-
-                Intent Storage_activity = new Intent(context, StorageActivity.class);
-                Storage_activity.putExtra("nick",nick);
-                Storage_activity.putExtra("pass",pass);
-                Storage_activity.putExtra("type",type);
-                context.startActivity(Storage_activity);
-
-            }
-
-        }
-        else{
-            Toast.makeText(context,"Acceso no authorizado",Toast.LENGTH_SHORT).show();
-        }
+        }else {Toast.makeText(context,"Acceso no authorizado",Toast.LENGTH_SHORT).show();
+        try {
+            finalize();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }}
     }
 
 }
