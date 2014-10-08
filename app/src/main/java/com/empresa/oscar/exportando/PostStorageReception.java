@@ -80,7 +80,7 @@ public class PostStorageReception extends AsyncTask<Void, Void, String> {
             nameValuePairs = new ArrayList<NameValuePair>(1);
             nameValuePairs.add(new BasicNameValuePair("employee_nickname", usr));
             nameValuePairs.add(new BasicNameValuePair("employee_password", pass));
-            nameValuePairs.add(new BasicNameValuePair("employee_id", Integer.toString(user_id)));
+            nameValuePairs.add(new BasicNameValuePair("delivery_employee_id", Integer.toString(user_id)));
             nameValuePairs.add(new BasicNameValuePair("reception_code_id", Integer.toString(code_id)));
             nameValuePairs.add(new BasicNameValuePair("reception_date", get_fecha()));
             nameValuePairs.add(new BasicNameValuePair("reception_amount", Integer.toString(amount)));

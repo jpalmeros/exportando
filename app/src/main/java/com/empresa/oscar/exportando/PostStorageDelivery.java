@@ -81,7 +81,7 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
             nameValuePairs = new ArrayList<NameValuePair>(1);
             nameValuePairs.add(new BasicNameValuePair("employee_nickname", usr));
             nameValuePairs.add(new BasicNameValuePair("employee_password", pass));
-            nameValuePairs.add(new BasicNameValuePair("employee_id", Integer.toString(user_id)));
+            nameValuePairs.add(new BasicNameValuePair("delivry_employee_id", Integer.toString(user_id)));
             nameValuePairs.add(new BasicNameValuePair("delivery_code_id", Integer.toString(code_id)));
             nameValuePairs.add(new BasicNameValuePair("delivery_date", get_fecha()));
             nameValuePairs.add(new BasicNameValuePair("delivery_amount", Integer.toString(amount)));
@@ -89,7 +89,7 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
             nameValuePairs.add(new BasicNameValuePair("delivery_purchase_id", Integer.toString(purchase_id)));
             nameValuePairs.add(new BasicNameValuePair("delivery_full", Boolean.toString(full)));
             nameValuePairs.add(new BasicNameValuePair("delivery_empty", Boolean.toString(empty)));
-            nameValuePairs.add(new BasicNameValuePair("code_value_serial", serial));
+            nameValuePairs.add(new BasicNameValuePair("delivery_value_serial", serial));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             responseHandler = new BasicResponseHandler();
             response = httpClient.execute(httpPost, responseHandler);
