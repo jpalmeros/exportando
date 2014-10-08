@@ -29,7 +29,7 @@ public class MainFullscreenActivity extends Activity {
 
     private Button login_button,exit_button,otro_button;
     private EditText login_nick,login_password,temp_login_button;
-    private Boolean displayed_login;
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +39,8 @@ public class MainFullscreenActivity extends Activity {
 
         //para QR
         mActivity = this;
-        mGetQRButton = (Button) findViewById(R.id.button_get_qr_code);
-        mQRCodeTextView = (TextView) findViewById(R.id.text_view_qr_content);
 
-        otro_button = (Button) findViewById(R.id.button_QRconLib);
+        otro_button = (Button) findViewById(R.id.btn_login_QR);
         otro_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,99 +50,30 @@ public class MainFullscreenActivity extends Activity {
 
 
 
-        displayed_login=false;
 
-        login_button=(Button)findViewById(R.id.login_button);
+
+        login_button=(Button)findViewById(R.id.btn_login_Manual);
         exit_button=(Button)findViewById(R.id.exit_button);
         login_nick=(EditText)findViewById(R.id.login_nick);
         login_password=(EditText)findViewById(R.id.login_password);
-
-
-        final ObjectAnimator loginOpen= new ObjectAnimator().ofFloat(login_button,"translationY",login_button.getY(),login_button.getY()-115);
-        loginOpen.setDuration(1000);
-        loginOpen.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)login_button.getLayoutParams();
-                params.setMargins(0,0,0,50);
-                login_button.setLayoutParams(params);
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-
-                login_nick.setVisibility(View.VISIBLE);
-                login_password.setVisibility(View.VISIBLE);
-                displayed_login=true;
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-            }
-        });
-
-
-        final ObjectAnimator loginClosed= new ObjectAnimator().ofFloat(login_button,"translationY",login_button.getY(),login_button.getY()+115);
-        loginClosed.setDuration(1000);
-
-        loginClosed.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-                login_nick.setVisibility(View.INVISIBLE);
-                login_password.setVisibility(View.INVISIBLE);
-                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)login_button.getLayoutParams();
-                params.setMargins(0,0,0,165);
-                login_button.setLayoutParams(params);
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                displayed_login = false;
-            }
-            @Override
-            public void onAnimationCancel(Animator animator) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-
-        });
-
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(!displayed_login){
-                    loginOpen.start();
-                    Log.i("login clicked","Opening");
-                }else{
-                    Log.i("login clicked","Posting");
-                    new Login(MainFullscreenActivity.this,login_nick.getText().toString(),login_password.getText().toString()).execute();
+                Log.i("login clicked","Posting");
+                new Login(MainFullscreenActivity.this,login_nick.getText().toString(),login_password.getText().toString()).execute();
                 }
 
-            }
+
         });
 
         exit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!displayed_login){
-                   finish();
-                }
-                else {
-                    loginClosed.start();
+                finish();
 
-                }
             }
         });
-
     }
 
     @Override

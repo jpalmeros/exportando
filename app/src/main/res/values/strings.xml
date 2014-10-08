@@ -7,7 +7,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="login_button">Login</string>
-    <string name="exit_button">Exit</string>
+    <string name="exit_button">Salir</string>
     <string name="ok_button">Ok</string>
     <string name="cancel_button">Cancel</string>
     <string name="Caja">Caja: </string>
@@ -30,6 +30,9 @@
     <color name="Boton">#33b5e5</color>
     <color name="Fondo">#ff1e63b5</color>
     <color name="Texto_1">#FFF</color>
+
+    <string name="ingresaconQR">Ingresar con Tarjeta</string>
+    <string name="ingresamanual">Ingresar con datos</string>
 
     <string name="title_activity_leer_qr">LeerQR</string>
     <string name="title_activity_leer_qr_prodcuto">LeerQR_prodcuto</string>

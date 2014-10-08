@@ -105,6 +105,11 @@ public class Login extends AsyncTask<Void, Void, String> {
         } catch (Exception ex) {
             error = true;
             Log.e("error",ex.toString());
+            try {
+                finalize();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
             return null;
         }
         return authorization;
@@ -118,6 +123,12 @@ public class Login extends AsyncTask<Void, Void, String> {
             Log.d("Login","Datos correctos");
         } else {
             Log.d("Login","Datos incorrectos");
+            Toast.makeText(context,"Acceso no authorizado",Toast.LENGTH_SHORT).show();
+            try {
+                finalize();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
         }
         progressDialog.dismiss();
         if(authorization.equals("granted")){
@@ -156,4 +167,5 @@ public class Login extends AsyncTask<Void, Void, String> {
             Toast.makeText(context,"Acceso no authorizado",Toast.LENGTH_SHORT).show();
         }
     }
+
 }
