@@ -15,7 +15,7 @@
         android:layout_height="fill_parent"
         android:orientation="vertical"
         android:gravity="top"
-        android:layout_weight="5">
+        android:layout_weight="8">
         <TextView
             android:id="@+id/title"
             android:text="@string/app_name"
@@ -25,7 +25,7 @@
             android:layout_centerHorizontal="true"
             android:textSize="42dp"
             android:textStyle="bold"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="5dp"/>
         <RelativeLayout
             android:id="@+id/valuesCompra"
             android:layout_width="wrap_content"
@@ -88,6 +88,7 @@
         android:orientation="vertical"
         android:gravity="top"
         android:padding="10dp"
+        android:layout_marginTop="5dp"
         android:layout_weight="4">
         <TextView
             android:id="@+id/amount_header"
@@ -95,21 +96,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/Texto_1"
-            android:layout_gravity="left"
+            android:layout_gravity="center"
             android:textSize="28dp"
             android:textStyle="bold"
             android:layout_marginBottom="10dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="13dp"
             android:orientation="horizontal">
 
 
             <EditText
                 android:id="@+id/amount_delivery"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:textColor="@color/Texto_2"
                 android:textSize="28sp"
                 android:inputType="number"
@@ -123,7 +124,7 @@
             <Button
                 android:id="@+id/btn_recepcion_delivery"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:textStyle="normal"
                 android:textColor="@color/Texto_1"
