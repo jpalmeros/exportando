@@ -35,7 +35,7 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
     private ResponseHandler<String> responseHandler;
     private Activity context;
     private boolean error,full,empty;
-    private String serial, success, status;
+    private String serial, success;
     private int purchase_id, code_id, amount, user_id;
     int id,location_id;
     String nick, pass, type, authorization;
@@ -108,8 +108,7 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
 
 
             success = login_response.getString("success");
-            status = login_response.getString("status");
-
+            
         } catch (Exception ex) {
             error = true;
             Log.e("error", ex.toString());
