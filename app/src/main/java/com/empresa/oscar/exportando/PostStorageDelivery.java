@@ -34,14 +34,14 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
     private List<NameValuePair> nameValuePairs;
     private ResponseHandler<String> responseHandler;
     private Activity context;
-    private boolean error,full,empty;
+    private boolean error;
     private String serial, success;
-    private int purchase_id, code_id, amount, user_id;
+    private int purchase_id, code_id, amount, user_id,full,empty;
     int id,location_id;
     String nick, pass, type, authorization;
 
 
-    PostStorageDelivery(Activity context, int purchase_id, int code_id, String serial, int user_id, int amount,int location_id,boolean full,boolean empty) {
+    PostStorageDelivery(Activity context, int purchase_id, int code_id, String serial, int user_id, int amount,int location_id,int full,int empty) {
         this.context = context;
         this.purchase_id = purchase_id;
         this.code_id = code_id;
@@ -87,8 +87,8 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
             nameValuePairs.add(new BasicNameValuePair("delivery_amount", Integer.toString(amount)));
             nameValuePairs.add(new BasicNameValuePair("delivery_location_id", Integer.toString(location_id)));
             nameValuePairs.add(new BasicNameValuePair("delivery_purchase_id", Integer.toString(purchase_id)));
-            nameValuePairs.add(new BasicNameValuePair("delivery_full", Boolean.toString(full)));
-            nameValuePairs.add(new BasicNameValuePair("delivery_empty", Boolean.toString(empty)));
+            nameValuePairs.add(new BasicNameValuePair("delivery_full", Integer.toString(full)));
+            nameValuePairs.add(new BasicNameValuePair("delivery_empty", Integer.toString(empty)));
             nameValuePairs.add(new BasicNameValuePair("delivery_value_serial", serial));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             responseHandler = new BasicResponseHandler();

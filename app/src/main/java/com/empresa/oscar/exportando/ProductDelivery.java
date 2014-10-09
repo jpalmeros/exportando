@@ -77,16 +77,15 @@ public class ProductDelivery extends Activity {
                     texto_amount.setError("Debes ingresar un valor adecuado");
                     return;
                 } else {
-                    boolean lleno,vacio;
-                    Log.e("checkbox ischecked", String.valueOf(full.isChecked()));
-                    Log.e("checkbox isactivated", String.valueOf(full.isActivated()));
+                    int lleno,vacio;
+                    Log.e("checkbox ischecked", Boolean.toString(full.isChecked()));
                     if (full.isChecked()) {
-                     lleno=true;
-                     vacio=false;
+                     lleno=1;
+                     vacio=0;
                     }
                     else{
-                        lleno=false;
-                        vacio=true;
+                        lleno=0;
+                        vacio=1;
                     }
                     Locacion loc = (Locacion) locSpinner.getSelectedItem();
                     int int_amount = Integer.parseInt(cadena_amount);

@@ -74,14 +74,14 @@ public class ProductReception extends Activity {
                     return;
                 }
                 else{
-                    boolean lleno,vacio;
+                    int lleno,vacio;
                     if (full.isChecked()) {
-                        lleno=true;
-                        vacio=false;
+                        lleno=1;
+                        vacio=0;
                     }
                     else{
-                        lleno=false;
-                        vacio=true;
+                        lleno=0;
+                        vacio=1;
                     }
                     Locacion loc=(Locacion)locSpinner.getSelectedItem();
                     int int_amount=Integer.parseInt(cadena_amount);
