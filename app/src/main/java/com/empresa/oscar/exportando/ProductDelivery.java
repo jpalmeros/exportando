@@ -32,12 +32,12 @@ public class ProductDelivery extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_delivery);
-        compra=(TextView)findViewById(R.id.id_compra_value);
-        caja=(TextView)findViewById(R.id.caja_value);
-        boton_recepcion=(Button)findViewById(R.id.recepcion);
-        texto_amount=(EditText)findViewById(R.id.amount);
+        compra=(TextView)findViewById(R.id.id_compra_value_delivery);
+        caja=(TextView)findViewById(R.id.caja_value_delivery);
+        boton_recepcion=(Button)findViewById(R.id.btn_recepcion_delivery);
+        texto_amount=(EditText)findViewById(R.id.amount_delivery);
 
-        full = (CheckBox) findViewById(R.id.lleno);
+        full = (CheckBox) findViewById(R.id.lleno_delivery);
 
 
         final Bundle bundle = getIntent().getExtras();

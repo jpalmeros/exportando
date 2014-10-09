@@ -45,7 +45,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/id_compra_value"
+                android:id="@+id/id_compra_value_delivery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/Texto_1"
@@ -71,7 +71,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/caja_value"
+                android:id="@+id/caja_value_delivery"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,8 +87,8 @@
         android:layout_height="fill_parent"
         android:orientation="vertical"
         android:gravity="top"
-        android:padding="20dp"
-        android:layout_weight="3">
+        android:padding="10dp"
+        android:layout_weight="4">
         <TextView
             android:id="@+id/amount_header"
             android:text="@string/Cantidad"
@@ -107,7 +107,7 @@
 
 
             <EditText
-                android:id="@+id/amount"
+                android:id="@+id/amount_delivery"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/Texto_2"
@@ -121,13 +121,13 @@
                 android:layout_marginRight="10dp"
                 />
             <Button
-                android:id="@+id/recepcion"
+                android:id="@+id/btn_recepcion_delivery"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:textStyle="bold"
+                android:layout_weight="3"
+                android:textStyle="normal"
                 android:textColor="@color/Texto_1"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:text="@string/Entrega"
                 android:background="@color/Boton"
                 />
@@ -148,7 +148,7 @@
             android:orientation="horizontal">
 
         <CheckBox
-            android:id="@+id/lleno"
+            android:id="@+id/lleno_delivery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/Texto_1"

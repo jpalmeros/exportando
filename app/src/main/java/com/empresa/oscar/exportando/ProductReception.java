@@ -30,13 +30,13 @@ public class ProductReception extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_delivery);
-        compra=(TextView)findViewById(R.id.id_compra_value);
-        caja=(TextView)findViewById(R.id.caja_value);
-        boton_recepcion=(Button)findViewById(R.id.recepcion);
-        texto_amount=(EditText)findViewById(R.id.amount);
+        setContentView(R.layout.activity_product_reception);
+        compra=(TextView)findViewById(R.id.id_compra_value_reception);
+        caja=(TextView)findViewById(R.id.caja_value_reception);
+        boton_recepcion=(Button)findViewById(R.id.btn_recepcion);
+        texto_amount=(EditText)findViewById(R.id.amount_reception);
 
-        full = (CheckBox) findViewById(R.id.lleno);
+        full = (CheckBox) findViewById(R.id.lleno_reception);
 
         final Bundle bundle = getIntent().getExtras();
         id_code_value= bundle.getInt("code_id");
@@ -49,8 +49,8 @@ public class ProductReception extends Activity {
         pass=prefs.getString("Password",null);
         user_id=prefs.getInt("Id",0);
 
-        caja.setText(caja_value);
-        compra.setText(id_compra_value);
+        caja.setText(String.valueOf(caja_value));
+        compra.setText(String.valueOf(id_compra_value));
 
         try {
             ListaLocaciones=new GetLocations(this,usr,pass,user_id).execute().get();

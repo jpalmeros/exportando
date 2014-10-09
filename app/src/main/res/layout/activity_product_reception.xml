@@ -46,7 +46,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/id_compra_value"
+                android:id="@+id/id_compra_value_reception"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/Texto_1"
@@ -72,7 +72,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/caja_value"
+                android:id="@+id/caja_value_reception"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
 
 
             <EditText
-                android:id="@+id/amount"
+                android:id="@+id/amount_reception"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/Texto_2"
@@ -121,7 +121,7 @@
                 android:layout_marginRight="10dp"
                 />
             <Button
-                android:id="@+id/recepcion"
+                android:id="@+id/btn_recepcion"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -144,11 +144,11 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/lleno"
+                android:id="@+id/lleno_reception"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/Texto_1"
