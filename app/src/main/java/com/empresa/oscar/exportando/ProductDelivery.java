@@ -78,6 +78,8 @@ public class ProductDelivery extends Activity {
                     return;
                 } else {
                     boolean lleno,vacio;
+                    Log.e("checkbox ischecked", String.valueOf(full.isChecked()));
+                    Log.e("checkbox isactivated", String.valueOf(full.isActivated()));
                     if (full.isChecked()) {
                      lleno=true;
                      vacio=false;
