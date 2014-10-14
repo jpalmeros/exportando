@@ -112,8 +112,10 @@ public class PostStorageReception extends AsyncTask<Void, Void, String> {
         } catch (Exception ex) {
             error = true;
             Log.e("error", ex.toString());
+            authorization="error";
             return null;
         }
+        authorization="exito";
         return authorization;
     }
 
