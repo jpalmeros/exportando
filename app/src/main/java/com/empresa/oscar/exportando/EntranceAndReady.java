@@ -34,6 +34,8 @@ public class EntranceAndReady extends Activity {
                 QR_producto.putExtra("pass",pass);
                 QR_producto.putExtra("type",type);
                 QR_producto.putExtra("process","entrance");
+                QR_producto.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                QR_producto.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(QR_producto);
 
             }
@@ -47,6 +49,8 @@ public class EntranceAndReady extends Activity {
                 QR_producto.putExtra("pass",pass);
                 QR_producto.putExtra("type",type);
                 QR_producto.putExtra("process","ready");
+                QR_producto.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                QR_producto.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(QR_producto);
             }
         });
