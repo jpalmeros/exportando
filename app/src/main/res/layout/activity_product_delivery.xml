@@ -157,6 +157,7 @@
                 android:textSize="28dp"
                 android:gravity="end"
                 android:textStyle="bold"
+                android:inputType="number"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginRight="10dp"

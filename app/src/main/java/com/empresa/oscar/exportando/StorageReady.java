@@ -86,11 +86,9 @@ public class StorageReady extends Activity {
                     }
 
                     if(responsePost.equals("exito")){
-                        try {
-                            this.finalize();
-                        } catch (Throwable throwable) {
-                            throwable.printStackTrace();
-                        }
+
+                            finish();
+
                     }
                 }
             }

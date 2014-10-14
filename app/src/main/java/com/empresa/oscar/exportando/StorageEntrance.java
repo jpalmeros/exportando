@@ -68,17 +68,11 @@ public class StorageEntrance extends Activity {
                 }
 
                 if(responsePost.equals("exito")){
-                    try {
-                        this.finalize();
-                    } catch (Throwable throwable) {
-                        throwable.printStackTrace();
-                    }
+                        finish();
                 }
             }
         });
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -59,6 +59,8 @@ public class LeerQR_prodcuto extends Activity implements ZBarScannerView.ResultH
             StorageEntrance.putExtra("purchase_id",Integer.parseInt(purchase_id));
             StorageEntrance.putExtra("purchase_box",Integer.parseInt(purchase_box));
             StorageEntrance.putExtra("code_value_serial",scanContent);
+            StorageEntrance.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            StorageEntrance.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(StorageEntrance);
             }
             if(process.equals("ready")){
@@ -67,6 +69,8 @@ public class LeerQR_prodcuto extends Activity implements ZBarScannerView.ResultH
                 StorageEntrance.putExtra("purchase_id",Integer.parseInt(purchase_id));
                 StorageEntrance.putExtra("purchase_box",Integer.parseInt(purchase_box));
                 StorageEntrance.putExtra("code_value_serial",scanContent);
+                StorageEntrance.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                StorageEntrance.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(StorageEntrance);
             }
             if(process.equals("entrega")){
@@ -75,6 +79,8 @@ public class LeerQR_prodcuto extends Activity implements ZBarScannerView.ResultH
                 Delivery.putExtra("purchase_id",Integer.parseInt(purchase_id));
                 Delivery.putExtra("purchase_box",Integer.parseInt(purchase_box));
                 Delivery.putExtra("code_value_serial",scanContent);
+                Delivery.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Delivery.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(Delivery);
             }
             if(process.equals("recepcion")){
@@ -83,6 +89,8 @@ public class LeerQR_prodcuto extends Activity implements ZBarScannerView.ResultH
                 Reception.putExtra("purchase_id",Integer.parseInt(purchase_id));
                 Reception.putExtra("purchase_box",Integer.parseInt(purchase_box));
                 Reception.putExtra("code_value_serial",scanContent);
+                Reception.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Reception.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(Reception);
             }
             //new Login(this,usr,pass).execute();
