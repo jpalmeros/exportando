@@ -14,6 +14,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.concurrent.ExecutionException;
+
 
 public class StorageReady extends Activity {
     private TextView usuario,caja,compra,serial;
@@ -21,7 +23,7 @@ public class StorageReady extends Activity {
     private Button registra;
     private SharedPreferences prefs;
     private int user_id;
-    private String id_code_value,id_compra_value,caja_value,serial_value,user_name;
+    private String id_code_value,id_compra_value,caja_value,serial_value,user_name,responsePost;
     private CheckBox full;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +77,21 @@ public class StorageReady extends Activity {
                     }
                     Log.e("Hola", String.valueOf(user_id));
                     int num=Integer.parseInt(cantidad.getText().toString());
-                    new PostStorageReady(StorageReady.this,Integer.parseInt(id_compra_value),Integer.parseInt(id_code_value),serial_value,user_id,num,lleno,vacio).execute();
+                    try {
+                        responsePost=new PostStorageReady(StorageReady.this,Integer.parseInt(id_compra_value),Integer.parseInt(id_code_value),serial_value,user_id,num,lleno,vacio).execute().get();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
 
+                    if(responsePost.equals("exito")){
+                        try {
+                            this.finalize();
+                        } catch (Throwable throwable) {
+                            throwable.printStackTrace();
+                        }
+                    }
                 }
             }
         });

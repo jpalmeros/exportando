@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.concurrent.ExecutionException;
+
 
 public class StorageEntrance extends Activity {
     private TextView usuario,caja,compra,serial;
@@ -19,7 +21,7 @@ public class StorageEntrance extends Activity {
     private Button registra;
     private SharedPreferences prefs;
     private int user_id;
-    private String id_code_value,id_compra_value,caja_value,serial_value,user_name;
+    private String id_code_value,id_compra_value,caja_value,serial_value,user_name,responsePost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +59,23 @@ public class StorageEntrance extends Activity {
             public void onClick(View view) {
                 Log.e("Hola", String.valueOf(user_id));
               int num=Integer.parseInt(cantidad.getText().toString());
-              new PostStorageEntrance(StorageEntrance.this,Integer.parseInt(id_compra_value),Integer.parseInt(id_code_value),serial_value,user_id,num).execute();
+                try {
+                    responsePost=new PostStorageEntrance(StorageEntrance.this,Integer.parseInt(id_compra_value),Integer.parseInt(id_code_value),serial_value,user_id,num).execute().get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
 
+                if(responsePost.equals("exito")){
+                    try {
+                        this.finalize();
+                    } catch (Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
+                }
             }
         });
-
 
     }
 
