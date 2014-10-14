@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import me.dm7.barcodescanner.zbar.Result;
 import me.dm7.barcodescanner.zbar.ZBarScannerView;
@@ -55,13 +53,21 @@ public class LeerQR_prodcuto extends Activity implements ZBarScannerView.ResultH
             Log.d("QR", purchase_id + " - " + purchase_box);
             //logueando
 
-            if(process.equals("primer-registro")){
+            if(process.equals("entrance")){
             Intent StorageEntrance = new Intent(this,StorageEntrance.class);
             StorageEntrance.putExtra("code_id",Integer.parseInt(code_id));
             StorageEntrance.putExtra("purchase_id",Integer.parseInt(purchase_id));
             StorageEntrance.putExtra("purchase_box",Integer.parseInt(purchase_box));
             StorageEntrance.putExtra("code_value_serial",scanContent);
             startActivity(StorageEntrance);
+            }
+            if(process.equals("ready")){
+                Intent StorageEntrance = new Intent(this,StorageEntrance.class);
+                StorageEntrance.putExtra("code_id",Integer.parseInt(code_id));
+                StorageEntrance.putExtra("purchase_id",Integer.parseInt(purchase_id));
+                StorageEntrance.putExtra("purchase_box",Integer.parseInt(purchase_box));
+                StorageEntrance.putExtra("code_value_serial",scanContent);
+                startActivity(StorageEntrance);
             }
             if(process.equals("entrega")){
                 Intent  Delivery= new Intent(this,ProductDelivery.class);

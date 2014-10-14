@@ -18,6 +18,8 @@
     <string name="Cantidad">Cantidad</string>
     <string name="Recepcion">Recepción </string>
     <string name="storageEntranceButton">Registrar</string>
+    <string name="PrimeraEntrada">Primera Entrada</string>
+    <string name="AlmacenListo">Producto Listo</string>
     <string name="title_activity_actividad_repartidor">ActividadRepartidor</string>
     <string name="title_activity_actividad_jefe_almacen">ActividadJefeAlmacen</string>
     <string name="title_activity_actividadefe_almacen">ActividadefeAlmacen</string>
@@ -33,11 +35,12 @@
 
     <string name="ingresaconQR">Ingresar con Tarjeta</string>
     <string name="ingresamanual">Ingresar con datos</string>
-
     <string name="title_activity_leer_qr">LeerQR</string>
     <string name="title_activity_leer_qr_prodcuto">LeerQR_prodcuto</string>
     <string name="title_activity_storage">StorageActivity</string>
     <string name="title_activity_product_delivery">ProductDelivery</string>
     <string name="title_activity_product_reception">ProductReception</string>
+    <string name="title_activity_entrance_and_ready">EntranceAndReady</string>
+    <string name="title_activity_storage_ready">StorageReady</string>
 
 </resources>

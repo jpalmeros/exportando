@@ -131,11 +131,10 @@ public class Login extends AsyncTask<Void, Void, String> {
                 Toast.makeText(context," Acceso authorizado a "+nick+"\n+"+type,Toast.LENGTH_SHORT).show();
 
                 if(type.equals("jefe-Almacen")){
-                    Intent QR_producto = new Intent(context, LeerQR_prodcuto.class);
+                    Intent QR_producto = new Intent(context, EntranceAndReady.class);
                     QR_producto.putExtra("nick",nick);
                     QR_producto.putExtra("pass",pass);
                     QR_producto.putExtra("type",type);
-                    QR_producto.putExtra("process","primer-registro");
                     context.startActivity(QR_producto);
 
 

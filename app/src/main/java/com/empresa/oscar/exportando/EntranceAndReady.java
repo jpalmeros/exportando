@@ -1,0 +1,74 @@
+package com.empresa.oscar.exportando;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
+
+public class EntranceAndReady extends Activity {
+    private Button entrance_button,ready_button;
+    private String nick,pass,type;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_entrance_and_ready);
+
+        entrance_button=(Button)findViewById(R.id.primera_entrada);
+        ready_button=(Button)findViewById(R.id.producto_listo);
+
+        SharedPreferences prefs = getSharedPreferences("Exporta",Activity.MODE_PRIVATE);
+        nick=prefs.getString("Empleado",null);
+        pass=prefs.getString("Password",null);
+        type=prefs.getString("Type",null);
+
+        entrance_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent QR_producto = new Intent(EntranceAndReady.this, LeerQR_prodcuto.class);
+                QR_producto.putExtra("nick",nick);
+                QR_producto.putExtra("pass",pass);
+                QR_producto.putExtra("type",type);
+                QR_producto.putExtra("process","entrance");
+                startActivity(QR_producto);
+
+            }
+        });
+
+        ready_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent QR_producto = new Intent(EntranceAndReady.this, LeerQR_prodcuto.class);
+                QR_producto.putExtra("nick",nick);
+                QR_producto.putExtra("pass",pass);
+                QR_producto.putExtra("type",type);
+                QR_producto.putExtra("process","ready");
+                startActivity(QR_producto);
+            }
+        });
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.storage, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}

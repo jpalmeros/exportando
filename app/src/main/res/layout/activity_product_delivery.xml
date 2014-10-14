@@ -147,18 +147,6 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="20dp"
             android:orientation="horizontal">
-
-        <CheckBox
-            android:id="@+id/lleno_delivery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/Texto_1"
-            android:layout_gravity="center"
-            android:width="32dp"
-            android:height="32dp"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/lleno_header"
-            android:layout_toEndOf="@+id/lleno_header" />
             <TextView
                 android:id="@+id/lleno_header"
                 android:text="@string/Lleno"
@@ -171,7 +159,20 @@
                 android:textStyle="bold"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_marginRight="10dp"
                 android:layout_alignTop="@+id/lleno_delivery" />
+
+            <CheckBox
+                android:id="@+id/lleno_delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/Texto_1"
+                android:layout_gravity="center"
+                android:width="32dp"
+                android:height="32dp"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/lleno_header"
+                android:layout_toEndOf="@+id/lleno_header" />
 
     </RelativeLayout>
     </LinearLayout>
