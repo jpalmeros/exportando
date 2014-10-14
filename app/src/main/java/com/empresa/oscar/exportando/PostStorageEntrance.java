@@ -125,10 +125,8 @@ public class PostStorageEntrance extends AsyncTask<Void, Void, String> {
             Log.d("Login","Datos incorrectos");
         }
         progressDialog.dismiss();
-        if(success.equals("exito")){
+        if(success.equals("granted")){
             Toast.makeText(context," Compra Registrada ",Toast.LENGTH_SHORT).show();
-
-
         }
         else{
             Toast.makeText(context,"Error al registrar la entrada",Toast.LENGTH_SHORT).show();
