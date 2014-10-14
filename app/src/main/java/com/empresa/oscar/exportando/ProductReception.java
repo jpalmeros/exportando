@@ -25,7 +25,7 @@ public class ProductReception extends Activity {
     private Spinner locSpinner;
     private Button boton_recepcion;
     private EditText texto_amount;
-    private String code_value_serial,usr,pass;
+    private String code_value_serial,usr,pass,responsePost;
     private  CheckBox full;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +85,17 @@ public class ProductReception extends Activity {
                     }
                     Locacion loc=(Locacion)locSpinner.getSelectedItem();
                     int int_amount=Integer.parseInt(cadena_amount);
-                    new PostStorageDelivery(ProductReception.this,id_compra_value,id_code_value,code_value_serial,user_id,int_amount,loc.getIndiceLocacion(),lleno,vacio).execute();
+                    try {
+                        responsePost=new PostStorageDelivery(ProductReception.this,id_compra_value,id_code_value,code_value_serial,user_id,int_amount,loc.getIndiceLocacion(),lleno,vacio).execute().get();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+
+                    if(responsePost.equals("exito")){
+                        finish();
+                    }
                 }
             }
         });

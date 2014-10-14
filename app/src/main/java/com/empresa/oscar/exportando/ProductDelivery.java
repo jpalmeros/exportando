@@ -22,7 +22,7 @@ public class ProductDelivery extends Activity {
     private ArrayList<Locacion> ListaLocaciones;
     private int user_id,id_compra_value,caja_value,id_code_value;
     private TextView compra,caja;
-    private String code_value_serial,pass,usr;
+    private String code_value_serial,pass,usr,responsePost;
     private locacionAdapter locAdapter;
     private Spinner locSpinner;
     private Button boton_recepcion;
@@ -89,7 +89,17 @@ public class ProductDelivery extends Activity {
                     }
                     Locacion loc = (Locacion) locSpinner.getSelectedItem();
                     int int_amount = Integer.parseInt(cadena_amount);
-                    new PostStorageDelivery(ProductDelivery.this, id_compra_value, id_code_value, code_value_serial, user_id, int_amount, loc.getIndiceLocacion(),lleno,vacio).execute();
+                    try {
+                        responsePost=new PostStorageDelivery(ProductDelivery.this, id_compra_value, id_code_value, code_value_serial, user_id, int_amount, loc.getIndiceLocacion(),lleno,vacio).execute().get();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+
+                    if(responsePost.equals("exito")){
+                        finish();
+                    }
                 }
             }
         });
