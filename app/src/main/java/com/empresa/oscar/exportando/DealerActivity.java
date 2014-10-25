@@ -10,17 +10,16 @@ import android.view.View;
 import android.widget.Button;
 
 
-public class StorageActivity extends Activity {
-    private Button entrega_button,recepcion_button,compra_button;
+public class DealerActivity extends Activity {
+    private Button entrega_button,recepcion_button;
     private String nick,pass,type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_storage);
+        setContentView(R.layout.activity_dealer);
 
         entrega_button=(Button)findViewById(R.id.entrega);
         recepcion_button=(Button)findViewById(R.id.recepcion);
-        compra_button=(Button)findViewById(R.id.compra);
 
         SharedPreferences prefs = getSharedPreferences("Exporta",Activity.MODE_PRIVATE);
         nick=prefs.getString("Empleado",null);
@@ -30,7 +29,7 @@ public class StorageActivity extends Activity {
         entrega_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent QR_producto = new Intent(StorageActivity.this, LeerQR_prodcuto.class);
+                Intent QR_producto = new Intent(DealerActivity.this, LeerQR_prodcuto.class);
                 QR_producto.putExtra("nick",nick);
                 QR_producto.putExtra("pass",pass);
                 QR_producto.putExtra("type",type);
@@ -45,7 +44,7 @@ public class StorageActivity extends Activity {
         recepcion_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent QR_producto = new Intent(StorageActivity.this, LeerQR_prodcuto.class);
+                Intent QR_producto = new Intent(DealerActivity.this, LeerQR_prodcuto.class);
                 QR_producto.putExtra("nick",nick);
                 QR_producto.putExtra("pass",pass);
                 QR_producto.putExtra("type",type);
@@ -53,20 +52,6 @@ public class StorageActivity extends Activity {
                 QR_producto.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 QR_producto.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(QR_producto);
-            }
-        });
-
-        compra_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent compra_producto = new Intent(StorageActivity.this, PurchaseActivity.class);
-                compra_producto.putExtra("nick",nick);
-                compra_producto.putExtra("pass",pass);
-                compra_producto.putExtra("type",type);
-                compra_producto.putExtra("process","compra");
-                compra_producto.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                compra_producto.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(compra_producto);
             }
         });
     }

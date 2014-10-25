@@ -11,7 +11,8 @@
     <string name="ok_button">Ok</string>
     <string name="cancel_button">Cancel</string>
     <string name="Caja">Caja: </string>
-    <string name="Compra">Compra: </string>
+    <string name="Compra">Compra</string>
+    <string name="Recibido">Recibido </string>
     <string name="Serial">Serial: </string>
     <string name="Entrega">Entrega </string>
     <string name="Lleno">Lleno: </string>
@@ -42,5 +43,7 @@
     <string name="title_activity_product_reception">ProductReception</string>
     <string name="title_activity_entrance_and_ready">EntranceAndReady</string>
     <string name="title_activity_storage_ready">StorageReady</string>
+    <string name="title_activity_dealer">DealerActivity</string>
+    <string name="title_activity_purchase">PurchaseActivity</string>
 
 </resources>
