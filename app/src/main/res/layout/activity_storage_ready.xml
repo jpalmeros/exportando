@@ -7,7 +7,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@color/Fondo"
-    tools:context="com.empresa.oscar.exportando.StorageEntrance">
+    tools:context="com.empresa.oscar.exportando.StorageReady">
     <TextView
         android:id="@+id/title"
         android:text="@string/app_name"
@@ -15,9 +15,9 @@
         android:layout_height="wrap_content"
         android:textColor="@color/Texto_1"
         android:layout_centerHorizontal="true"
-        android:textSize="42dp"
+        android:textSize="35dp"
         android:textStyle="bold"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginTop="11dp"/>
     <TextView
         android:id="@+id/user"
         android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
         android:textColor="@color/Texto_1"
         android:layout_centerHorizontal="true"
         android:text="@string/app_name"
-        android:textSize="32dp"
+        android:textSize="25dp"
         android:textStyle="bold"
         android:layout_below="@id/title"
         android:layout_marginTop="10dp"/>
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/user"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/id_compra"
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/Texto_1"
-            android:textSize="28dp"
+            android:textSize="23dp"
             android:layout_marginTop="0dp"
             android:textStyle="bold"/>
 
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/Texto_1"
             android:layout_centerHorizontal="true"
-            android:textSize="28dp"
+            android:textSize="23dp"
 
             android:layout_toRightOf="@id/id_compra"
             android:textStyle="bold"/>
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/Texto_1"
-            android:textSize="28dp"
+            android:textSize="23dp"
             android:layout_marginTop="10dp"
             android:textStyle="bold"/>
 
@@ -98,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/Texto_1"
-            android:textSize="28dp"
+            android:textSize="23dp"
             android:layout_marginTop="10dp"
             android:textStyle="bold"/>
 
@@ -117,8 +117,8 @@
         android:id="@+id/header_full"
         android:layout_below="@id/Serial"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="30dp"
         android:layout_above="@id/postEntrance"
         android:orientation="horizontal"
         android:layout_centerHorizontal="true">
@@ -129,7 +129,7 @@
             android:layout_height="match_parent"
             android:textColor="@color/Texto_1"
             android:layout_gravity="center"
-            android:textSize="28dp"
+            android:textSize="28sp"
             android:gravity="end"
             android:textStyle="bold"
             android:layout_alignParentLeft="true"
@@ -155,21 +155,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/Texto_1"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:text="@string/storageEntranceButton"
         android:background="@color/Boton"
         android:padding="12dp"
         android:width="200dp"
         android:textStyle="bold"
         android:layout_above="@+id/amount"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"/>
+        android:layout_centerHorizontal="true" />
     <EditText
         android:id="@+id/amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/Texto_2"
-        android:textSize="28dp"
+        android:textSize="28sp"
         android:background="@color/Texto_1"
         android:padding="5dp"
         android:width="200dp"

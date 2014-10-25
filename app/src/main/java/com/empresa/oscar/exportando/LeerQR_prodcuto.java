@@ -64,7 +64,7 @@ public class LeerQR_prodcuto extends Activity implements ZBarScannerView.ResultH
             startActivity(StorageEntrance);
             }
             if(process.equals("ready")){
-                Intent StorageEntrance = new Intent(this,StorageEntrance.class);
+                Intent StorageEntrance = new Intent(this,StorageReady.class);
                 StorageEntrance.putExtra("code_id",Integer.parseInt(code_id));
                 StorageEntrance.putExtra("purchase_id",Integer.parseInt(purchase_id));
                 StorageEntrance.putExtra("purchase_box",Integer.parseInt(purchase_box));

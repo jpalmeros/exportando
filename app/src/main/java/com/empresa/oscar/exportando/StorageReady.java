@@ -28,7 +28,7 @@ public class StorageReady extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_storage_entrance);
+        setContentView(R.layout.activity_storage_ready);
 
         usuario=(TextView)findViewById(R.id.user);
         compra=(TextView)findViewById(R.id.id_compra_value);
