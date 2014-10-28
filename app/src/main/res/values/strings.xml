@@ -21,6 +21,10 @@
     <string name="storageEntranceButton">Registrar</string>
     <string name="PrimeraEntrada">Primera Entrada</string>
     <string name="AlmacenListo">Producto Listo</string>
+    <string name="Si">Sí</string>
+    <string name="No">No</string>
+    <string name="RecepcionCompra">Recepción de Compra</string>
+    <string name="ConfirmaRecepcionCompra">Seguro de registrar esta compra?</string>
     <string name="title_activity_actividad_repartidor">ActividadRepartidor</string>
     <string name="title_activity_actividad_jefe_almacen">ActividadJefeAlmacen</string>
     <string name="title_activity_actividadefe_almacen">ActividadefeAlmacen</string>

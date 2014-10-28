@@ -16,18 +16,23 @@
             android:id="@+id/producto"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/Texto_1"
+            android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceSmall" />
         <TextView
             android:id="@+id/proveedor"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:textColor="@color/Texto_1"
             android:textAppearance="?android:attr/textAppearanceSmall" />
         <TextView
             android:id="@+id/cantidad"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:textColor="@color/Texto_1"
+            android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
 
@@ -36,6 +41,8 @@
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_weight="4"
+        android:textColor="@color/Texto_1"
+        android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <Button
