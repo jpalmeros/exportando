@@ -30,35 +30,61 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:gravity="top"
         android:layout_weight="1">
         <Button
             android:id="@+id/primera_entrada"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:textSize="25dp"
+            android:textSize="28dp"
             android:textStyle="bold"
             android:textColor="@color/Texto_1"
             android:text="@string/PrimeraEntrada"
             android:background="@color/Boton"/>
         <Button
-            android:id="@+id/producto_listo"
+            android:id="@+id/crear_orden"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:textStyle="bold"
             android:textColor="@color/Texto_1"
-            android:textSize="25dp"
-            android:text="@string/AlmacenListo"
+            android:textSize="28dp"
+            android:text="@string/CrearOrden"
             android:background="@color/Boton"/>
-
     </LinearLayout>
 
-
-
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:gravity="top"
+            android:layout_weight="1">
+        <Button
+            android:id="@+id/mermas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:textStyle="bold"
+            android:textColor="@color/Texto_1"
+            android:textSize="28dp"
+            android:text="@string/Mermas"
+            android:background="@color/Boton"/>
+        <Button
+            android:id="@+id/producto_listo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:textStyle="bold"
+            android:textColor="@color/Texto_1"
+            android:textSize="28dp"
+            android:text="@string/AlmacenListo"
+            android:background="@color/Boton"/>
+    </LinearLayout>
 
 </LinearLayout>

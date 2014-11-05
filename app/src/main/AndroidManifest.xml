@@ -71,6 +71,10 @@
             android:name="com.empresa.oscar.exportando.PurchaseActivity"
             android:label="@string/title_activity_purchase" >
         </activity>
+        <activity
+            android:name="com.empresa.oscar.exportando.LossActivity"
+            android:label="@string/title_activity_loss" >
+        </activity>
     </application>
 
 </manifest>

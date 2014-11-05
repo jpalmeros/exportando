@@ -1,17 +1,24 @@
 package com.empresa.oscar.exportando;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+
+import java.util.concurrent.ExecutionException;
 
 
 public class EntranceAndReady extends Activity {
-    private Button entrance_button,ready_button;
+    private Button entrance_button,ready_button,order_button,loss_button;
     private String nick,pass,type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +27,8 @@ public class EntranceAndReady extends Activity {
 
         entrance_button=(Button)findViewById(R.id.primera_entrada);
         ready_button=(Button)findViewById(R.id.producto_listo);
+        order_button=(Button)findViewById(R.id.crear_orden);
+        loss_button=(Button)findViewById(R.id.mermas);
 
         SharedPreferences prefs = getSharedPreferences("Exporta",Activity.MODE_PRIVATE);
         nick=prefs.getString("Empleado",null);
@@ -52,6 +61,35 @@ public class EntranceAndReady extends Activity {
                 QR_producto.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 QR_producto.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(QR_producto);
+            }
+        });
+
+        order_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(EntranceAndReady.this);
+
+                LayoutInflater inflater = EntranceAndReady.this.getLayoutInflater();
+                final View dialogView =inflater.inflate(R.layout.order_dialog, null);
+                builder.setTitle(R.string.CrearOrden);
+                builder.setView(dialogView)
+
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                EditText inputAmount = (EditText) dialogView.findViewById(R.id.order_amount);
+                                int amount=Integer.parseInt(inputAmount.getText().toString());
+                                Log.e("cantidad de Orden",Integer.toString(amount));
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Log.e("cantidad de Orden","Cancelada");
+                            }
+                        });
+                builder.create();
+                builder.show();
             }
         });
     }

@@ -20,7 +20,11 @@
     <string name="Recepcion">Recepción </string>
     <string name="storageEntranceButton">Registrar</string>
     <string name="PrimeraEntrada">Primera Entrada</string>
-    <string name="AlmacenListo">Producto Listo</string>
+    <string name="CrearOrden">Crear \nOrden</string>
+    <string name="CantidadOrden">Cantidad</string>
+    <string name="Mermas">Mermas</string>
+    <string name="Atender">Atender</string>
+    <string name="AlmacenListo">Producto \nListo</string>
     <string name="Si">Sí</string>
     <string name="No">No</string>
     <string name="RecepcionCompra">Recepción de Compra</string>
@@ -49,5 +53,6 @@
     <string name="title_activity_storage_ready">StorageReady</string>
     <string name="title_activity_dealer">DealerActivity</string>
     <string name="title_activity_purchase">PurchaseActivity</string>
+    <string name="title_activity_loss">LossActivity</string>
 
 </resources>
