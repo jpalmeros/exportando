@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.empresa.oscar.exportando.MainFullscreenActivity"
+            android:name=".MainFullscreenActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,60 +20,64 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.empresa.oscar.exportando.ActividadJefeAlmacen"
+            android:name=".ActividadJefeAlmacen"
             android:label="@string/title_activity_actividad_jefe_almacen" >
         </activity>
         <activity
-            android:name="com.empresa.oscar.exportando.util.ActividadAlmacenista"
+            android:name=".util.ActividadAlmacenista"
             android:label="@string/title_activity_actividad_almacenista" >
         </activity>
         <activity
-            android:name="com.empresa.oscar.exportando.ActicvidadAlmacenista"
+            android:name=".ActicvidadAlmacenista"
             android:label="@string/title_activity_acticvidad_almacenista" >
         </activity>
         <activity
-            android:name="com.empresa.oscar.exportando.StorageEntrance"
+            android:name=".StorageEntrance"
             android:label="@string/title_activity_storage_entrance" >
         </activity>
         <activity
-            android:name="com.empresa.oscar.exportando.LeerQR_login"
+            android:name=".LeerQR_login"
             android:label="@string/title_activity_leer_qr" >
         </activity>
         <activity
-            android:name="com.empresa.oscar.exportando.LeerQR_prodcuto"
+            android:name=".LeerQR_prodcuto"
             android:label="@string/title_activity_leer_qr_prodcuto" >
         </activity>
         <activity
-            android:name="com.empresa.oscar.exportando.StorageActivity"
+            android:name=".StorageActivity"
             android:label="@string/title_activity_storage" >
         </activity>
         <activity
-            android:name="com.empresa.oscar.exportando.ProductDelivery"
+            android:name=".ProductDelivery"
             android:label="@string/title_activity_product_delivery" >
         </activity>
         <activity
-            android:name="com.empresa.oscar.exportando.ProductReception"
+            android:name=".ProductReception"
             android:label="@string/title_activity_product_reception" >
         </activity>
         <activity
-            android:name="com.empresa.oscar.exportando.EntranceAndReady"
+            android:name=".EntranceAndReady"
             android:label="@string/title_activity_entrance_and_ready" >
         </activity>
         <activity
-            android:name="com.empresa.oscar.exportando.StorageReady"
+            android:name=".StorageReady"
             android:label="@string/title_activity_storage_ready" >
         </activity>
         <activity
-            android:name="com.empresa.oscar.exportando.DealerActivity"
+            android:name=".DealerActivity"
             android:label="@string/title_activity_dealer" >
         </activity>
         <activity
-            android:name="com.empresa.oscar.exportando.PurchaseActivity"
+            android:name=".PurchaseActivity"
             android:label="@string/title_activity_purchase" >
         </activity>
         <activity
-            android:name="com.empresa.oscar.exportando.LossActivity"
+            android:name=".LossActivity"
             android:label="@string/title_activity_loss" >
+        </activity>
+        <activity
+            android:name=".OrderCodeActivity"
+            android:label="@string/title_activity_order_code" >
         </activity>
     </application>
 

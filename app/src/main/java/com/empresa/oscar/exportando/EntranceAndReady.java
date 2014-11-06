@@ -14,8 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.concurrent.ExecutionException;
-
 
 public class EntranceAndReady extends Activity {
     private Button entrance_button,ready_button,order_button,loss_button;
@@ -81,6 +79,12 @@ public class EntranceAndReady extends Activity {
                                 EditText inputAmount = (EditText) dialogView.findViewById(R.id.order_amount);
                                 int amount=Integer.parseInt(inputAmount.getText().toString());
                                 Log.e("cantidad de Orden",Integer.toString(amount));
+                                Intent OrderCode = new Intent(EntranceAndReady.this, OrderCodeActivity.class);
+                                OrderCode.putExtra("amount",amount);
+                                OrderCode.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                OrderCode.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                EntranceAndReady.this.startActivity(OrderCode);
+
                             }
                         })
                         .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
