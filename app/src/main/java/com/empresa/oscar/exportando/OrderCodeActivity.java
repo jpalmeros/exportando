@@ -50,10 +50,11 @@ public class OrderCodeActivity extends Activity {
         for(int i=0;i<ordenArray.length();i++){
             try {
                 JSONObject code= ordenArray.getJSONObject(i);
-                OrderCode actualorderCode=new OrderCode(code.getInt("codeId"),code.getString("codeSerial"),
+                OrderCode actualorderCode=new OrderCode(code.getInt("codeOrderId"),code.getInt("codeId"),code.getString("codeSerial"),
                         code.getInt("productId"),code.getInt("productType"),code.getString("productName"),
                         code.getInt("codeAmount"));
                 listOrderCode.add(actualorderCode);
+                int lastCodeOrderId=code.getInt("codeOrderId")+1;
                 int type=code.getInt("tipo");
                 switch (type){
                     case 1:

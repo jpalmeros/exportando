@@ -24,7 +24,9 @@ public class OrderCode {
     int productType;
     String productName;
     int amount;
-    OrderCode(int codeId,String codeSerial,int productId,int productType,String productName,int amount){
+    int codeOrderId;
+    OrderCode(int codeOrderId,int codeId,String codeSerial,int productId,int productType,String productName,int amount){
+        this.codeOrderId=codeOrderId;
         this. codeId=codeId;
         this.codeSerial=codeSerial;
         this.productName=productName;
@@ -61,7 +63,7 @@ class orderCodeAdapter extends BaseAdapter
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return items.get(position).codeOrderId;
     }
 
     @Override
