@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 
-public class EntranceAndReady extends Activity {
+public class StorageBossActivity extends Activity {
     private Button entrance_button,ready_button,order_button,loss_button;
     private String nick,pass,type;
     @Override
@@ -36,7 +36,7 @@ public class EntranceAndReady extends Activity {
         entrance_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent QR_producto = new Intent(EntranceAndReady.this, LeerQR_prodcuto.class);
+                Intent QR_producto = new Intent(StorageBossActivity.this, LeerQR_prodcuto.class);
                 QR_producto.putExtra("nick",nick);
                 QR_producto.putExtra("pass",pass);
                 QR_producto.putExtra("type",type);
@@ -51,7 +51,7 @@ public class EntranceAndReady extends Activity {
         ready_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent QR_producto = new Intent(EntranceAndReady.this, LeerQR_prodcuto.class);
+                Intent QR_producto = new Intent(StorageBossActivity.this, LeerQR_prodcuto.class);
                 QR_producto.putExtra("nick",nick);
                 QR_producto.putExtra("pass",pass);
                 QR_producto.putExtra("type",type);
@@ -66,9 +66,9 @@ public class EntranceAndReady extends Activity {
             @Override
             public void onClick(View view) {
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(EntranceAndReady.this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(StorageBossActivity.this);
 
-                LayoutInflater inflater = EntranceAndReady.this.getLayoutInflater();
+                LayoutInflater inflater = StorageBossActivity.this.getLayoutInflater();
                 final View dialogView =inflater.inflate(R.layout.order_dialog, null);
                 builder.setTitle(R.string.CrearOrden);
                 builder.setView(dialogView)
@@ -79,12 +79,11 @@ public class EntranceAndReady extends Activity {
                                 EditText inputAmount = (EditText) dialogView.findViewById(R.id.order_amount);
                                 int amount=Integer.parseInt(inputAmount.getText().toString());
                                 Log.e("cantidad de Orden",Integer.toString(amount));
-                                Intent OrderCode = new Intent(EntranceAndReady.this, OrderCodeActivity.class);
+                                Intent OrderCode = new Intent(StorageBossActivity.this, OrderCodeActivity.class);
                                 OrderCode.putExtra("amount",amount);
                                 OrderCode.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 OrderCode.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                EntranceAndReady.this.startActivity(OrderCode);
-
+                                StorageBossActivity.this.startActivity(OrderCode);
                             }
                         })
                         .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {

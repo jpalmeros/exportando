@@ -23,28 +23,37 @@
             android:layout_height="wrap_content"
             android:textColor="@color/Texto_1"
             android:layout_centerHorizontal="true"
-            android:textSize="42dp"
+            android:textSize="42sp"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="5dp"/>
     </RelativeLayout>
     <ListView
         android:id="@+id/ordercodes"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="10">
+        android:layout_weight="20">
     </ListView>
     <Button
-        android:id="@+id/recepcion"
+        android:id="@+id/agregar_producto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_margin="5dp"
         android:textStyle="bold"
         android:textColor="@color/Texto_1"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:text="@string/AgregarOrderCode"
         android:background="@color/Boton"/>
-
-
+    <Button
+        android:id="@+id/cancelar_orden"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:textStyle="bold"
+        android:textColor="@color/Texto_1"
+        android:textSize="25sp"
+        android:text="@string/CancelarOrden"
+        android:background="@color/Cancel_1"/>
 
 </LinearLayout>

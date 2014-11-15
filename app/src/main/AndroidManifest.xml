@@ -20,18 +20,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActividadJefeAlmacen"
-            android:label="@string/title_activity_actividad_jefe_almacen" >
-        </activity>
-        <activity
-            android:name=".util.ActividadAlmacenista"
-            android:label="@string/title_activity_actividad_almacenista" >
-        </activity>
-        <activity
-            android:name=".ActicvidadAlmacenista"
-            android:label="@string/title_activity_acticvidad_almacenista" >
-        </activity>
-        <activity
             android:name=".StorageEntrance"
             android:label="@string/title_activity_storage_entrance" >
         </activity>
@@ -56,7 +44,7 @@
             android:label="@string/title_activity_product_reception" >
         </activity>
         <activity
-            android:name=".EntranceAndReady"
+            android:name=".StorageBossActivity"
             android:label="@string/title_activity_entrance_and_ready" >
         </activity>
         <activity
