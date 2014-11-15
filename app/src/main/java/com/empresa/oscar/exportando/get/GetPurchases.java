@@ -42,7 +42,7 @@ public class GetPurchases extends AsyncTask<Void, Void, ArrayList> {
     int id;
     String nick,pass,type,authorization;
 
-    GetPurchases(Activity context,String nick,String pass,int id) {
+    public GetPurchases(Activity context, String nick, String pass, int id) {
         this.context = context;
         this.nick=nick;
         this.pass=pass;

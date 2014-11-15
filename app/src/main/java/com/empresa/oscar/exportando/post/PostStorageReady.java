@@ -40,7 +40,7 @@ public class PostStorageReady extends AsyncTask<Void, Void, String> {
     private int purchase_id,code_id,amount,user_id,full,empty;
     String authorization;
 
-    PostStorageReady(Activity context,int purchase_id,int code_id, String serial ,int user_id, int amount,int full,int empty) {
+    public PostStorageReady(Activity context, int purchase_id, int code_id, String serial, int user_id, int amount, int full, int empty) {
         this.context = context;
         this.purchase_id=purchase_id;
         this.code_id=code_id;

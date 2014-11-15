@@ -38,7 +38,7 @@ public class GetLosses extends AsyncTask<Void, Void, ArrayList> {
     int id;
     String nick,pass,type,authorization;
 
-    GetLosses(Activity context,String nick,String pass,int id) {
+    public GetLosses(Activity context, String nick, String pass, int id) {
         this.context = context;
         this.nick=nick;
         this.pass=pass;

@@ -41,7 +41,7 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
     String authorization;
 
 
-    PostStorageDelivery(Activity context, int purchase_id, int code_id, String serial, int user_id, int amount,int location_id,int full,int empty) {
+    public PostStorageDelivery(Activity context, int purchase_id, int code_id, String serial, int user_id, int amount, int location_id, int full, int empty) {
         this.context = context;
         this.purchase_id = purchase_id;
         this.code_id = code_id;

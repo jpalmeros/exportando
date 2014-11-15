@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
 
-import com.empresa.oscar.exportando.Locacion;
+import com.empresa.oscar.exportando.object.Locacion;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -42,7 +42,7 @@ public class GetLocations extends AsyncTask<Void, Void, ArrayList> {
     String nick,pass,type,authorization;
 
 
-    GetLocations(Activity context,String nick,String pass,int id) {
+    public GetLocations(Activity context, String nick, String pass, int id) {
         this.context = context;
         this.nick=nick;
         this.pass=pass;

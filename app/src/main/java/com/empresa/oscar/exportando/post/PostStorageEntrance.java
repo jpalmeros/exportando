@@ -40,7 +40,7 @@ public class PostStorageEntrance extends AsyncTask<Void, Void, String> {
     String authorization;
 
 
-    PostStorageEntrance(Activity context,int purchase_id,int code_id, String serial ,int user_id, int amount) {
+    public PostStorageEntrance(Activity context, int purchase_id, int code_id, String serial, int user_id, int amount) {
         this.context = context;
         this.purchase_id=purchase_id;
         this.code_id=code_id;

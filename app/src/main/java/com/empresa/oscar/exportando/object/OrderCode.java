@@ -11,7 +11,7 @@ public class OrderCode {
     public String productName;
     public int amount;
     public int codeOrderId;
-    OrderCode(int codeOrderId,int codeId,String codeSerial,int productId,int productType,String productName,int amount){
+    public OrderCode(int codeOrderId, int codeId, String codeSerial, int productId, int productType, String productName, int amount){
         this.codeOrderId=codeOrderId;
         this. codeId=codeId;
         this.codeSerial=codeSerial;
