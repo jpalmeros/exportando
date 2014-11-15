@@ -1,4 +1,4 @@
-package com.empresa.oscar.exportando;
+package com.empresa.oscar.exportando.get;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
+
+import com.empresa.oscar.exportando.Locacion;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -22,21 +24,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by lord on 05/11/2014.
+ * Created by lord on 02/10/2014.
  */
-public class GetProduct extends AsyncTask<Void, Void, Product> {
+
+
+public class GetLocations extends AsyncTask<Void, Void, ArrayList> {
     private ProgressDialog progressDialog;
     private HttpClient httpClient;
     private HttpPost httpPost;
+    private ArrayList<Locacion> listaLocaciones;
     private List<NameValuePair> nameValuePairs;
     private ResponseHandler<String> responseHandler;
     private Activity context;
     boolean error;
     String tipo;
-    int id,code_id;
+    int id;
     String nick,pass,type,authorization;
 
-    GetProduct(Activity context,String nick,String pass,int id,int code_id) {
+
+    GetLocations(Activity context,String nick,String pass,int id) {
         this.context = context;
         this.nick=nick;
         this.pass=pass;
@@ -53,49 +59,50 @@ public class GetProduct extends AsyncTask<Void, Void, Product> {
     }
 
     @Override
-    protected Product doInBackground(Void... arg0) {
+    protected ArrayList doInBackground(Void... arg0) {
         String response;
         String aux;
-        Product producto=null;
+        listaLocaciones=new ArrayList<Locacion>();
         try {
             httpClient = new DefaultHttpClient();
-            httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/getProduct.php");
+            httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/getLocations.php");
             nameValuePairs = new ArrayList<NameValuePair>(1);
             nameValuePairs.add(new BasicNameValuePair("employee_nickname", nick));
             nameValuePairs.add(new BasicNameValuePair("employee_password", pass));
             nameValuePairs.add(new BasicNameValuePair("employee_id", Integer.toString(id)));
-            nameValuePairs.add(new BasicNameValuePair("code_id", Integer.toString(code_id)));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             responseHandler = new BasicResponseHandler();
             response = httpClient.execute(httpPost, responseHandler);
             aux= response.toString();
 
             if (aux != null) {
-                Log.i("Producto", "Pidiendo Producto \n ");
+                Log.i("Locaciones", "Pidiendo Locaciones \n ");
             } else {
-                Log.e("Producto","fallo producto");
+                Log.e("Locaciones","fallaron las locaciones");
             }
 
-            JSONArray products = new JSONArray(aux);
+            JSONArray locaciones = new JSONArray(aux);
 
-            Log.e("Response", products.toString());
-            Log.e("Tamaño producto", String.valueOf(products.length()));
-            for (int i = 0; i < products.length(); i++) {
-                JSONObject product = products.getJSONObject(i);
-                Log.e("Tamaño Compras", Integer.toString(product.getInt("product_amount")) + product.getString("product_name"));
-                producto=new Product(product.getInt("product_id"),product.getInt("product_type_id"),product.getInt("product_amount"),product.getString("product_name"));
+            Log.e("Response",locaciones.toString());
+            Log.e("Tamaño locaciones", String.valueOf(locaciones.length()));
+            for (int i = 0; i < locaciones.length(); i++) {
+                JSONObject evobject = locaciones.getJSONObject(i);
+                Log.e("Tamaño locaciones", evobject.getString("location_id")+evobject.getString("location_name"));
+                String templocation=evobject.getString("location_id");
+                listaLocaciones.add(new Locacion( Integer.parseInt(templocation),evobject.getString("location_name")));
             }
+
         } catch (Exception ex) {
             error = true;
             Log.e("error",ex.toString());
             return null;
         }
-        return producto;
+        return listaLocaciones;
     }
 
     @TargetApi(Build.VERSION_CODES.CUPCAKE)
-    protected void onPostExecute(Product producto) {
-        super.onPostExecute(producto);
+    protected void onPostExecute(ArrayList result) {
+        super.onPostExecute(result);
         progressDialog.hide();
         if (!error) {
             Log.d("Login","Datos correctos");

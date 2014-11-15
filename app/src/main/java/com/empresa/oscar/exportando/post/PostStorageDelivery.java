@@ -1,4 +1,4 @@
-package com.empresa.oscar.exportando;
+package com.empresa.oscar.exportando.post;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -37,8 +37,8 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
     private boolean error;
     private String serial, success;
     private int purchase_id, code_id, amount, user_id,full,empty;
-    int id,location_id;
-    String nick, pass, type, authorization;
+    int location_id;
+    String authorization;
 
 
     PostStorageDelivery(Activity context, int purchase_id, int code_id, String serial, int user_id, int amount,int location_id,int full,int empty) {

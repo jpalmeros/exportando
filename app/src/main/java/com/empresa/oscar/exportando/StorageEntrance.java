@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.empresa.oscar.exportando.post.PostStorageEntrance;
+
 import java.util.concurrent.ExecutionException;
 
 

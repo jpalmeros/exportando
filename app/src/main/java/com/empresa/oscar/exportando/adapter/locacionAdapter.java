@@ -1,4 +1,4 @@
-package com.empresa.oscar.exportando;
+package com.empresa.oscar.exportando.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,29 +8,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.empresa.oscar.exportando.R;
+import com.empresa.oscar.exportando.object.Locacion;
+
 import java.util.ArrayList;
 
 /**
- * Created by lord on 01/10/2014.
+ * Created by lord on 14/11/2014.
  */
-class Locacion{
-    int indice_locacion;
-    String nombre_locacion;
-    public Locacion(int indice_locacion,String nombre_locacion) {
-        this.indice_locacion=indice_locacion;
-        this.nombre_locacion=nombre_locacion;
-    }
-    int getIndiceLocacion(){
-        return indice_locacion;
-    }
-    String getNombreLocacion(){
-        return nombre_locacion;
-    }
-}
-class ViewHolderLocacion {
-    TextView locacion_nombre;
-}
-class locacionAdapter extends BaseAdapter {
+public class locacionAdapter extends BaseAdapter {
     protected Activity activity;
     protected ArrayList<Locacion> items;
 

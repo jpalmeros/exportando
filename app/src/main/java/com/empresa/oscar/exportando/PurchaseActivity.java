@@ -7,6 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.empresa.oscar.exportando.adapter.purchaseAdapter;
+import com.empresa.oscar.exportando.get.GetPurchases;
+import com.empresa.oscar.exportando.object.Purchase;
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 

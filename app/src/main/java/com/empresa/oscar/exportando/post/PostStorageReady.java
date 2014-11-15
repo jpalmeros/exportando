@@ -1,4 +1,8 @@
-package com.empresa.oscar.exportando;
+package com.empresa.oscar.exportando.post;
+
+/**
+ * Created by lord on 13/10/2014.
+ */
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -24,10 +28,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by UsuarioRasa on 25/09/2014.
- */
-public class PostStorageEntrance extends AsyncTask<Void, Void, String> {
+public class PostStorageReady extends AsyncTask<Void, Void, String> {
     private ProgressDialog progressDialog;
     private HttpClient httpClient;
     private HttpPost httpPost;
@@ -36,19 +37,18 @@ public class PostStorageEntrance extends AsyncTask<Void, Void, String> {
     private Activity context;
     boolean error;
     private String serial,success,status;
-    private int purchase_id,code_id,amount,user_id;
-    int id;
-    String nick,pass,type,authorization;
+    private int purchase_id,code_id,amount,user_id,full,empty;
+    String authorization;
 
-
-    PostStorageEntrance(Activity context,int purchase_id,int code_id, String serial ,int user_id, int amount) {
+    PostStorageReady(Activity context,int purchase_id,int code_id, String serial ,int user_id, int amount,int full,int empty) {
         this.context = context;
         this.purchase_id=purchase_id;
         this.code_id=code_id;
         this.user_id=user_id;
         this.serial=serial;
         this.amount=amount;
-
+        this.full=full;
+        this.empty=empty;
     }
 
     protected void onPreExecute() {
@@ -73,16 +73,18 @@ public class PostStorageEntrance extends AsyncTask<Void, Void, String> {
         //post para obtener los dominios
         try {
             httpClient = new DefaultHttpClient();
-            httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/storageEntrance.php");
+            httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/storageReady.php");
             nameValuePairs = new ArrayList<NameValuePair>(1);
             nameValuePairs.add(new BasicNameValuePair("nick", usr));
             nameValuePairs.add(new BasicNameValuePair("password", pass));
             nameValuePairs.add(new BasicNameValuePair("storage_employee_id", Integer.toString(user_id)));
-            nameValuePairs.add(new BasicNameValuePair("storage_entrance_code_id", Integer.toString(code_id)));
-            nameValuePairs.add(new BasicNameValuePair("storage_entrance_date", get_fecha()));
-            nameValuePairs.add(new BasicNameValuePair("storage_entrance_amount", Integer.toString(amount)));
+            nameValuePairs.add(new BasicNameValuePair("storage_ready_code_id", Integer.toString(code_id)));
+            nameValuePairs.add(new BasicNameValuePair("storage_ready_date", get_fecha()));
+            nameValuePairs.add(new BasicNameValuePair("storage_ready_amount", Integer.toString(amount)));
             nameValuePairs.add(new BasicNameValuePair("code_purchase_id", Integer.toString(purchase_id)));
             nameValuePairs.add(new BasicNameValuePair("code_value_serial", serial));
+            nameValuePairs.add(new BasicNameValuePair("storage_full", Integer.toString(full)));
+            nameValuePairs.add(new BasicNameValuePair("storage_empty", Integer.toString(empty)));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             responseHandler = new BasicResponseHandler();
             response = httpClient.execute(httpPost, responseHandler);
@@ -99,14 +101,13 @@ public class PostStorageEntrance extends AsyncTask<Void, Void, String> {
             JSONObject login_response = jsonObject.getJSONObject("response");
             Log.e("Response Object", login_response.toString());
 
-
             success=  login_response.getString("success");
             status=  login_response.getString("status");
 
         } catch (Exception ex) {
             error = true;
-            authorization="error";
             Log.e("error",ex.toString());
+            authorization="error";
             return authorization;
         }
         authorization="exito";
@@ -124,7 +125,7 @@ public class PostStorageEntrance extends AsyncTask<Void, Void, String> {
         }
         progressDialog.dismiss();
         if(success.equals("granted")){
-            Toast.makeText(context," Compra Registrada ",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, " Compra Registrada ", Toast.LENGTH_SHORT).show();
         }
         else{
             Toast.makeText(context,"Error al registrar la entrada",Toast.LENGTH_SHORT).show();
@@ -136,5 +137,5 @@ public class PostStorageEntrance extends AsyncTask<Void, Void, String> {
         String strDate = sdfDate.format(now);
         Log.d("fecha",strDate);
         return strDate;
-        }
+    }
 }

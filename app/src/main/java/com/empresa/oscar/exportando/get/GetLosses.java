@@ -1,4 +1,4 @@
-package com.empresa.oscar.exportando;
+package com.empresa.oscar.exportando.get;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -6,6 +6,8 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
+
+import com.empresa.oscar.exportando.object.Loss;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;

@@ -14,6 +14,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.empresa.oscar.exportando.post.PostStorageReady;
+
 import java.util.concurrent.ExecutionException;
 
 

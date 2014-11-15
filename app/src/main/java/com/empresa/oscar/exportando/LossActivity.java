@@ -7,6 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.empresa.oscar.exportando.adapter.lossAdapter;
+import com.empresa.oscar.exportando.get.GetLosses;
+import com.empresa.oscar.exportando.object.Loss;
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 

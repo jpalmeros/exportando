@@ -1,8 +1,4 @@
-package com.empresa.oscar.exportando;
-
-/**
- * Created by UsuarioRasa on 28/10/2014.
- */
+package com.empresa.oscar.exportando.post;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -28,8 +24,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-public class PostPurchaseReception extends AsyncTask<Void, Void, String> {
+/**
+ * Created by UsuarioRasa on 25/09/2014.
+ */
+public class PostStorageEntrance extends AsyncTask<Void, Void, String> {
     private ProgressDialog progressDialog;
     private HttpClient httpClient;
     private HttpPost httpPost;
@@ -37,15 +35,18 @@ public class PostPurchaseReception extends AsyncTask<Void, Void, String> {
     private ResponseHandler<String> responseHandler;
     private Activity context;
     boolean error;
-    private String success,status;
-    private int purchase_id;
-    int id;
-    String nick,pass,type,authorization;
+    private String serial,success,status;
+    private int purchase_id,code_id,amount,user_id;
+    String authorization;
 
 
-    PostPurchaseReception(Activity context,int purchase_id ) {
+    PostStorageEntrance(Activity context,int purchase_id,int code_id, String serial ,int user_id, int amount) {
         this.context = context;
         this.purchase_id=purchase_id;
+        this.code_id=code_id;
+        this.user_id=user_id;
+        this.serial=serial;
+        this.amount=amount;
 
     }
 
@@ -67,18 +68,20 @@ public class PostPurchaseReception extends AsyncTask<Void, Void, String> {
         SharedPreferences prefs = context.getSharedPreferences("Exporta",Activity.MODE_PRIVATE);
         String usr=prefs.getString("Empleado",null);
         String pass=prefs.getString("Password",null);
-        int user_id= prefs.getInt("Id",0);
 
         //post para obtener los dominios
         try {
             httpClient = new DefaultHttpClient();
-            httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/purchaseReception.php");
+            httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/storageEntrance.php");
             nameValuePairs = new ArrayList<NameValuePair>(1);
             nameValuePairs.add(new BasicNameValuePair("nick", usr));
             nameValuePairs.add(new BasicNameValuePair("password", pass));
-            nameValuePairs.add(new BasicNameValuePair("purchase_employee_id", Integer.toString(user_id)));
-            nameValuePairs.add(new BasicNameValuePair("purchase_reception_date", get_fecha()));
-            nameValuePairs.add(new BasicNameValuePair("purchase_id", Integer.toString(purchase_id)));
+            nameValuePairs.add(new BasicNameValuePair("storage_employee_id", Integer.toString(user_id)));
+            nameValuePairs.add(new BasicNameValuePair("storage_entrance_code_id", Integer.toString(code_id)));
+            nameValuePairs.add(new BasicNameValuePair("storage_entrance_date", get_fecha()));
+            nameValuePairs.add(new BasicNameValuePair("storage_entrance_amount", Integer.toString(amount)));
+            nameValuePairs.add(new BasicNameValuePair("code_purchase_id", Integer.toString(purchase_id)));
+            nameValuePairs.add(new BasicNameValuePair("code_value_serial", serial));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             responseHandler = new BasicResponseHandler();
             response = httpClient.execute(httpPost, responseHandler);
@@ -114,17 +117,16 @@ public class PostPurchaseReception extends AsyncTask<Void, Void, String> {
         super.onPostExecute(result);
         progressDialog.hide();
         if (!error) {
-            Log.d("Registro de compra","Datos correctos");
+            Log.d("Login","Datos correctos");
         } else {
-            Log.d("Registro de compra","Datos incorrectos");
+            Log.d("Login","Datos incorrectos");
         }
         progressDialog.dismiss();
         if(success.equals("granted")){
-            Toast.makeText(context, " Compra Registrada ", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(context," Compra Registrada ",Toast.LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(context,"Error al registrar la compra",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"Error al registrar la entrada",Toast.LENGTH_SHORT).show();
         }
     }
     private String get_fecha(){
@@ -133,5 +135,5 @@ public class PostPurchaseReception extends AsyncTask<Void, Void, String> {
         String strDate = sdfDate.format(now);
         Log.d("fecha",strDate);
         return strDate;
-    }
+        }
 }

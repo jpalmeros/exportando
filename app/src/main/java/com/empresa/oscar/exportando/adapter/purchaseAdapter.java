@@ -1,69 +1,31 @@
-package com.empresa.oscar.exportando;
+package com.empresa.oscar.exportando.adapter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
+
+import com.empresa.oscar.exportando.object.Purchase;
+import com.empresa.oscar.exportando.PurchaseActivity;
+import com.empresa.oscar.exportando.R;
+import com.empresa.oscar.exportando.post.PostPurchaseReception;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Created by UsuarioRasa on 25/10/2014.
+ * Created by lord on 14/11/2014.
  */
-public class Purchase {
-    private String proveedor;
-    private String producto;
-    private String fecha;
-    private int cantidad;
-    private int id_compra;
-    Purchase(String proveedor,String producto,String fecha,int cantidad,int id_compra){
-        this.producto=producto;
-        this.proveedor=proveedor;
-        this.cantidad=cantidad;
-        this.id_compra=id_compra;
-        this.fecha=fecha;
-
-    }
-    public String getProveedor(){
-        return proveedor;
-    }
-    public String getProducto(){
-        return producto;
-    }public int getCantidad(){
-        return cantidad;
-    }
-    public String getFecha(){
-        return fecha;
-    }
-    public  int getId_compra(){
-        return id_compra;
-    }
-
-}
-class ViewHolderPurchase {
-    TextView proveedor_texto;
-    TextView producto_texto;
-    TextView cantidad_texto;
-    TextView fecha_texto;
-    Button boton_compra;
-}
-class purchaseAdapter extends BaseAdapter
+public class purchaseAdapter extends BaseAdapter
 {
     protected Activity activity;
     protected ArrayList<Purchase> items;
@@ -151,7 +113,7 @@ class purchaseAdapter extends BaseAdapter
                                     e.printStackTrace();
                                 }
 
-                                Log.e("Registrando","compra "+Integer.toString(actualpurchase.getId_compra()));
+                                Log.e("Registrando", "compra " + Integer.toString(actualpurchase.getId_compra()));
 
                             }
                         })
@@ -171,4 +133,3 @@ class purchaseAdapter extends BaseAdapter
     }
 
 }
-

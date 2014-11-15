@@ -11,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.empresa.oscar.exportando.get.GetProduct;
+import com.empresa.oscar.exportando.object.Product;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
