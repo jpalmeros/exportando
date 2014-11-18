@@ -19,6 +19,7 @@ import com.empresa.oscar.exportando.adapter.orderCodeAdapter;
 import com.empresa.oscar.exportando.get.GetProduct;
 import com.empresa.oscar.exportando.object.OrderCode;
 import com.empresa.oscar.exportando.object.Product;
+import com.empresa.oscar.exportando.post.PostOrder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -83,6 +84,13 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
         confirmOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                JSONArray postOrder= new JSONArray();
+                JSONObject postOrderAmount=new JSONObject();
+                try {
+                    postOrderAmount.put("order_amount",Integer.toString(orderAmount));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 JSONArray orderCodes = new JSONArray();
                 for (OrderCode ordercode : listOrderCode){
                     JSONObject ob=new JSONObject();
@@ -90,7 +98,7 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
                         ob.put("code_id",ordercode.codeId);
                         ob.put("product_id",ordercode.productId);
                         ob.put("product_type_id",ordercode.productType);
-                        ob.put("product_amount_remains",ordercode.amount);
+                        ob.put("product_amount",ordercode.amount);
                         ob.put("code_value_serial",ordercode.codeSerial);
                         ob.put("product_name",ordercode.productName);
                         orderCodes.put(ob);
@@ -98,7 +106,10 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
                         e.printStackTrace();
                     }
                 }
-                Log.e("order codes a registrar",orderCodes.toString());
+                postOrder.put(postOrderAmount);
+                postOrder.put(orderCodes);
+                Log.e("order codes a registrar",postOrder.toString());
+                new PostOrder(OrderCodeActivity.this,postOrder).execute();
             }
         });
     }
@@ -199,6 +210,13 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
         confirmOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                JSONArray postOrder= new JSONArray();
+                JSONObject postOrderAmount=new JSONObject();
+                try {
+                    postOrderAmount.put("order_amount",Integer.toString(orderAmount));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 JSONArray orderCodes = new JSONArray();
                 for (OrderCode ordercode : listOrderCode){
                     JSONObject ob=new JSONObject();
@@ -206,7 +224,7 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
                         ob.put("code_id",ordercode.codeId);
                         ob.put("product_id",ordercode.productId);
                         ob.put("product_type_id",ordercode.productType);
-                        ob.put("product_amount_remains",ordercode.amount);
+                        ob.put("product_amount",ordercode.amount);
                         ob.put("code_value_serial",ordercode.codeSerial);
                         ob.put("product_name",ordercode.productName);
                         orderCodes.put(ob);
@@ -214,7 +232,10 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
                         e.printStackTrace();
                     }
                 }
-                Log.e("order codes a registrar",orderCodes.toString());
+                postOrder.put(postOrderAmount);
+                postOrder.put(orderCodes);
+                Log.e("order codes a registrar", postOrder.toString());
+                new PostOrder(OrderCodeActivity.this,postOrder).execute();
             }
         });
     }
