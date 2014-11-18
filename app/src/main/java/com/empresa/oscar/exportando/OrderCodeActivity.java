@@ -21,6 +21,8 @@ import com.empresa.oscar.exportando.object.OrderCode;
 import com.empresa.oscar.exportando.object.Product;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -31,16 +33,17 @@ import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
 
 public class OrderCodeActivity extends Activity implements ZBarScannerView.ResultHandler{
-    int amount;
+    public static int orderAmount;
     String orderString,usr,pass;
     JSONArray ordenArray;
     ArrayList<OrderCode> listOrderCode;
     orderCodeAdapter adapertOrderCode;
     ListView listViewOrderCode;
-    Button cancelOrder,addOrderCode;
+    public static Button cancelOrder,addOrderCode,confirmOrder;
     SharedPreferences prefs;
     Product product;
-    int shell,pañal,etiquetillas,user_id;
+    public static int shell,pañal,etiquetillas;
+    int user_id;
     private ZBarScannerView mScannerView;
 
     @Override
@@ -49,7 +52,7 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
         setContentView(R.layout.activity_order_code);
 
         final Bundle bundle = getIntent().getExtras();
-        amount= bundle.getInt("amount");
+        orderAmount= bundle.getInt("amount");
         prefs = getSharedPreferences("Exporta",Activity.MODE_PRIVATE);
         orderString=prefs.getString("orderString","");
         usr=prefs.getString("Empleado",null);
@@ -63,51 +66,39 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
         listOrderCode=new ArrayList<OrderCode>();
 
         cancelOrder=(Button)findViewById(R.id.cancelar_orden);
+        confirmOrder=(Button)findViewById(R.id.confirmar_orden);
         addOrderCode=(Button)findViewById(R.id.agregar_producto);
         listViewOrderCode=(ListView)findViewById(R.id.ordercodes);
-
+        confirmOrder.setEnabled(false);
         mScannerView = new ZBarScannerView(this);    // Programmatically initialize the scanner view
 
-
-        /*try {
-            ordenArray=new JSONArray(orderString);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        for(int i=0;i<ordenArray.length();i++){
-            try {
-                JSONObject code= ordenArray.getJSONObject(i);
-                OrderCode actualorderCode=new OrderCode(code.getInt("codeOrderId"),code.getInt("codeId"),code.getString("codeSerial"),
-                        code.getInt("productId"),code.getInt("productType"),code.getString("productName"),
-                        code.getInt("codeAmount"));
-                listOrderCode.add(actualorderCode);
-                int lastCodeOrderId=code.getInt("codeOrderId")+1;
-                int type=code.getInt("tipo");
-                switch (type){
-                    case 1:
-                        shell++;
-                        break;
-                    case 2:
-                        etiquetillas++;
-                        break;
-                    case 3:
-                        pañal++;
-                        break;
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        */
         Log.e("Orden Actual","Shell ="+Integer.toString(shell)+", Pañal="+Integer.toString(pañal)+", Etiquetillas"+Integer.toString(etiquetillas));
-
-        //adapertOrderCode=new orderCodeAdapter(OrderCodeActivity.this,listOrderCode);
-        //listViewOrderCode.setAdapter(adapertOrderCode);
 
         addOrderCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setContentView(mScannerView);
+            }
+        });
+        confirmOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                JSONArray orderCodes = new JSONArray();
+                for (OrderCode ordercode : listOrderCode){
+                    JSONObject ob=new JSONObject();
+                    try {
+                        ob.put("code_id",ordercode.codeId);
+                        ob.put("product_id",ordercode.productId);
+                        ob.put("product_type_id",ordercode.productType);
+                        ob.put("product_amount_remains",ordercode.amount);
+                        ob.put("code_value_serial",ordercode.codeSerial);
+                        ob.put("product_name",ordercode.productName);
+                        orderCodes.put(ob);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Log.e("order codes a registrar",orderCodes.toString());
             }
         });
     }
@@ -146,7 +137,28 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
                                     product.getProductId(),product.getProductTypeId(),product.getProductName(),
                                     amount);
                             listOrderCode.add(actualorderCode);
+                            int type=actualorderCode.productType;
+                            switch (type){
+                                case 1:
+                                    shell+=amount;
+                                    break;
+                                case 2:
+                                    etiquetillas+=amount;
+                                    break;
+                                case 3:
+                                    pañal+=amount;
+                                    break;
+                            }
                             initialize_view();
+                            if((shell&etiquetillas&pañal)==orderAmount){
+
+                                confirmOrder.setEnabled(true);
+                            }
+                            else {
+
+                                confirmOrder.setEnabled(false);
+                            }
+                            Log.e("Orden Actual","Shell ="+Integer.toString(shell)+", Pañal="+Integer.toString(pañal)+", Etiquetillas"+Integer.toString(etiquetillas));
                             adapertOrderCode=new orderCodeAdapter(OrderCodeActivity.this,listOrderCode);
                             listViewOrderCode.setAdapter(adapertOrderCode);
 
@@ -176,10 +188,33 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
         cancelOrder=(Button)findViewById(R.id.cancelar_orden);
         addOrderCode=(Button)findViewById(R.id.agregar_producto);
         listViewOrderCode=(ListView)findViewById(R.id.ordercodes);
+        confirmOrder=(Button)findViewById(R.id.confirmar_orden);
+
         addOrderCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setContentView(mScannerView);
+            }
+        });
+        confirmOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                JSONArray orderCodes = new JSONArray();
+                for (OrderCode ordercode : listOrderCode){
+                    JSONObject ob=new JSONObject();
+                    try {
+                        ob.put("code_id",ordercode.codeId);
+                        ob.put("product_id",ordercode.productId);
+                        ob.put("product_type_id",ordercode.productType);
+                        ob.put("product_amount_remains",ordercode.amount);
+                        ob.put("code_value_serial",ordercode.codeSerial);
+                        ob.put("product_name",ordercode.productName);
+                        orderCodes.put(ob);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Log.e("order codes a registrar",orderCodes.toString());
             }
         });
     }

@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.empresa.oscar.exportando.OrderCodeActivity;
 import com.empresa.oscar.exportando.R;
 import com.empresa.oscar.exportando.object.OrderCode;
 
@@ -83,7 +84,30 @@ public class orderCodeAdapter extends BaseAdapter
                                 String exito="";
                                 items.remove(position);
                                 notifyDataSetChanged();
+
+                                int type=actualOrderCode.productType;
+                                switch (type){
+                                    case 1:
+                                       OrderCodeActivity.shell-=actualOrderCode.amount;
+                                        break;
+                                    case 2:
+                                        OrderCodeActivity.etiquetillas-=actualOrderCode.amount;
+                                        break;
+                                    case 3:
+                                        OrderCodeActivity.pañal-=actualOrderCode.amount;
+                                        break;
+                                }
+                                if((OrderCodeActivity.shell&OrderCodeActivity.etiquetillas&OrderCodeActivity.pañal)==OrderCodeActivity.orderAmount){
+
+                                    OrderCodeActivity.confirmOrder.setEnabled(true);
+                                }
+                                else {
+
+                                    OrderCodeActivity.confirmOrder.setEnabled(false);
+                                }
                                 Log.e("Confirma", "Borrar Order Code");
+                                Log.e("Orden Actual","Shell ="+Integer.toString(OrderCodeActivity.shell)+", Pañal="+Integer.toString(OrderCodeActivity.pañal)+", Etiquetillas"+Integer.toString(OrderCodeActivity.etiquetillas));
+
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -94,7 +118,6 @@ public class orderCodeAdapter extends BaseAdapter
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
-
             }
         });
 
