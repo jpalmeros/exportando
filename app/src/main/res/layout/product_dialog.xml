@@ -44,8 +44,8 @@
             android:layout_margin="5dp"
             android:textStyle="bold"
             android:layout_below="@id/title"
-            android:layout_toRightOf="@id/ProductoHeader"
-            android:layout_toEndOf="@id/ProductoHeader"
+            android:layout_toRightOf="@id/SerialHeader"
+            android:layout_toEndOf="@id/SerialHeader"
             android:layout_marginTop="5dp"/>
         <TextView
             android:id="@+id/ProductoHeader"

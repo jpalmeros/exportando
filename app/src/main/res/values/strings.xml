@@ -25,13 +25,17 @@
     <string name="ProductoOrden">Agregar Producto\na Orden</string>
     <string name="CantidadOrden">Cantidad</string>
     <string name="Mermas">Mermas</string>
-    <string name="AgregarOrderCode">Agregar Producto</string>
+    <string name="AgregarOrderCode">Agregar\nProducto</string>
     <string name="CancelarOrden">Cancelar Orden</string>
     <string name="Atender">Atender</string>
     <string name="Borrar">Borrar</string>
     <string name="AlmacenListo">Producto \nListo</string>
     <string name="ProductoNombre">Producto:</string>
     <string name="Disponibles">Disponibles:</string>
+
+    <string name="ConfirmarOrden">Confirmar\nOrden</string>
+    <string name="BorrarProducto">Borrar Producto </string>
+    <string name="ConfirmaBorrarProducto">Seguro de borrar este prroducto?</string>
     <string name="Si">Sí</string>
     <string name="No">No</string>
     <string name="RecepcionCompra">Recepción de Compra</string>

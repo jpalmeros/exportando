@@ -53,7 +53,7 @@ public class orderCodeAdapter extends BaseAdapter
 
         if(vi == null|| !(vi.getTag() instanceof ViewHolderLocacion)) {
             LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            vi = inflater.inflate(R.layout.loss_list_item, null);
+            vi = inflater.inflate(R.layout.order_code_list_item, null);
 
             viewhold=new ViewHolderOrderCode();
             viewhold.codeSerial_texto=(TextView) vi.findViewById(R.id.serial);
@@ -68,7 +68,7 @@ public class orderCodeAdapter extends BaseAdapter
         OrderCode oc = items.get(position);
         viewhold.codeSerial_texto.setText(oc.codeSerial);
         viewhold.producto_texto.setText(oc.productName);
-        viewhold.cantida_texto.setText(oc.amount);
+        viewhold.cantida_texto.setText(Integer.toString(oc.amount));
         viewhold.boton_borrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,16 +76,14 @@ public class orderCodeAdapter extends BaseAdapter
                 final OrderCode actualOrderCode=items.get(position);
 
                 new AlertDialog.Builder(activity)
-                        .setTitle(R.string.RecepcionCompra)
-                        .setMessage(R.string.ConfirmaRecepcionCompra)
+                        .setTitle(R.string.BorrarProducto)
+                        .setMessage(R.string.ConfirmaBorrarProducto)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 String exito="";
-                                // continue with delete
-
-
+                                items.remove(position);
+                                notifyDataSetChanged();
                                 Log.e("Confirma", "Borrar Order Code");
-
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

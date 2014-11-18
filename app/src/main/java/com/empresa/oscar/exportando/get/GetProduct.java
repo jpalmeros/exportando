@@ -37,12 +37,12 @@ public class GetProduct extends AsyncTask<Void, Void, Product> {
     String tipo;
     int id,code_id;
     String nick,pass,type,authorization;
-
     public GetProduct(Activity context, String nick, String pass, int id, int code_id) {
         this.context = context;
         this.nick=nick;
         this.pass=pass;
         this.id=id;
+        this.code_id=code_id;
     }
 
     protected void onPreExecute() {
@@ -52,10 +52,12 @@ public class GetProduct extends AsyncTask<Void, Void, Product> {
         progressDialog.setMessage("Autenificando, espere por favor...");
         progressDialog.setIndeterminate(true);
         progressDialog.show();
+
     }
 
     @Override
     protected Product doInBackground(Void... arg0) {
+
         String response;
         String aux;
         Product producto=null;
@@ -84,8 +86,9 @@ public class GetProduct extends AsyncTask<Void, Void, Product> {
             Log.e("Tamaño producto", String.valueOf(products.length()));
             for (int i = 0; i < products.length(); i++) {
                 JSONObject product = products.getJSONObject(i);
-                Log.e("Tamaño Compras", Integer.toString(product.getInt("product_amount")) + product.getString("product_name"));
-                producto=new Product(product.getInt("product_id"),product.getInt("product_type_id"),product.getInt("product_amount"),product.getString("product_name"));
+
+                Log.e("Tamaño Poducto", Integer.toString(product.getInt("product_amount_remains")) + product.getString("product_name"));
+                producto=new Product(product.getInt("code_id"),product.getInt("product_id"),product.getInt("product_type_id"),product.getInt("product_amount_remains"),product.getString("product_name"),product.getString("code_value_serial"));
             }
         } catch (Exception ex) {
             error = true;
@@ -98,7 +101,9 @@ public class GetProduct extends AsyncTask<Void, Void, Product> {
     @TargetApi(Build.VERSION_CODES.CUPCAKE)
     protected void onPostExecute(Product producto) {
         super.onPostExecute(producto);
+
         progressDialog.hide();
+
         if (!error) {
             Log.d("Login","Datos correctos");
         } else {
