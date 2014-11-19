@@ -24,11 +24,10 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -68,15 +67,23 @@ public class PostOrder extends AsyncTask<Void, Void, String> {
         SharedPreferences prefs = context.getSharedPreferences("Exporta", Activity.MODE_PRIVATE);
         String usr = prefs.getString("Empleado", null);
         String pass = prefs.getString("Password", null);
-
+        JSONObject usuario=new JSONObject();
+        try {
+            usuario.put("employee_nickname",usr);
+            usuario.put("employee_password",pass);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         try {
             httpClient = new DefaultHttpClient();
             httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/postOrder.php");
+            httpPost.setHeader("Content-Type", "application/json");
+            httpPost.setHeader("Accept-Encoding", "application/json");
             nameValuePairs = new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("employee_nickname", usr));
-            nameValuePairs.add(new BasicNameValuePair("employee_password", pass));
+            nameValuePairs.add(new BasicNameValuePair("user",usuario.toString()));
             nameValuePairs.add(new BasicNameValuePair("order", postOrder.toString()));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
             responseHandler = new BasicResponseHandler();
             response = httpClient.execute(httpPost, responseHandler);
             aux = response.toString();
