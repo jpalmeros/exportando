@@ -105,7 +105,6 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
             Log.e("Response", jsonObject.toString());
             JSONObject login_response = jsonObject.getJSONObject("response");
             Log.e("Response Object", login_response.toString());
-
             success = login_response.getString("success");
 
         } catch (Exception ex) {

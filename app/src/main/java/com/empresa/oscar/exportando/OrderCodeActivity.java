@@ -81,6 +81,7 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
                 setContentView(mScannerView);
             }
         });
+
         confirmOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,6 +111,8 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
                 postOrder.put(orderCodes);
                 Log.e("order codes a registrar",postOrder.toString());
                 new PostOrder(OrderCodeActivity.this,postOrder).execute();
+                mScannerView.stopCamera();
+                finish();
             }
         });
     }
@@ -178,6 +181,8 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
                     .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             Log.e("Cantidad de Producto","Cancelada");
+                            mScannerView.startCamera();
+                            setContentView(mScannerView);
                         }
                     });
             builder.create();
@@ -236,6 +241,8 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
                 postOrder.put(orderCodes);
                 Log.e("order codes a registrar", postOrder.toString());
                 new PostOrder(OrderCodeActivity.this,postOrder).execute();
+                mScannerView.stopCamera();
+                finish();
             }
         });
     }
