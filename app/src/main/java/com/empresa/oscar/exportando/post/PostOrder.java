@@ -15,34 +15,30 @@ import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
-import org.apache.http.NameValuePair;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 public class PostOrder extends AsyncTask<Void, Void, String> {
     private ProgressDialog progressDialog;
     private HttpClient httpClient;
     private HttpPost httpPost;
-    private List<NameValuePair> nameValuePairs;
-    private ResponseHandler<String> responseHandler;
     private Activity context;
     private boolean error;
     private String  success;
     private JSONArray postOrder;
     String authorization;
-
 
     public PostOrder(Activity context, JSONArray postOrder) {
         this.context = context;
@@ -60,9 +56,10 @@ public class PostOrder extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... arg0) {
-        String response;
-        String aux;
+        String aux="";
         JSONObject jsonObject;
+        InputStream inputStream;
+        String json="";
 
         SharedPreferences prefs = context.getSharedPreferences("Exporta", Activity.MODE_PRIVATE);
         String usr = prefs.getString("Empleado", null);
@@ -77,17 +74,18 @@ public class PostOrder extends AsyncTask<Void, Void, String> {
         try {
             httpClient = new DefaultHttpClient();
             httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/postOrder.php");
+            JSONObject jsonPost = new JSONObject();
+            jsonPost.accumulate("user", usuario);
+            jsonPost.accumulate("order", postOrder);
+            json = jsonPost.toString();
+            StringEntity se = new StringEntity(json);
+            httpPost.setEntity(se);
             httpPost.setHeader("Content-Type", "application/json");
             httpPost.setHeader("Accept-Encoding", "application/json");
-            nameValuePairs = new ArrayList<NameValuePair>(1);
-            nameValuePairs.add(new BasicNameValuePair("user",usuario.toString()));
-            nameValuePairs.add(new BasicNameValuePair("order", postOrder.toString()));
-            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-            responseHandler = new BasicResponseHandler();
-            response = httpClient.execute(httpPost, responseHandler);
-            aux = response.toString();
-            if (aux != null) {
+            HttpResponse httpResponse = httpClient.execute(httpPost);
+            inputStream = httpResponse.getEntity().getContent();
+            if (inputStream!=null) {
+                aux =convertInputStreamToString(inputStream);
                 Log.i("Registro de orden", "Registro posteado\n ");
             } else {
                 Log.e("Registro de orden", "fallo el Registro");
@@ -98,7 +96,7 @@ public class PostOrder extends AsyncTask<Void, Void, String> {
             JSONObject login_response = jsonObject.getJSONObject("response");
             Log.e("Response Object", login_response.toString());
             success = login_response.getString("success");
-
+            error=false;
         } catch (Exception ex) {
             error = true;
             Log.e("error", ex.toString());
@@ -121,10 +119,18 @@ public class PostOrder extends AsyncTask<Void, Void, String> {
         progressDialog.dismiss();
         if (success.equals("exito")) {
             Toast.makeText(context, " Orden Registrada ", Toast.LENGTH_SHORT).show();
-
-
         } else {
             Toast.makeText(context, "Error al registrar la Orden", Toast.LENGTH_SHORT).show();
         }
+    }
+    private static String convertInputStreamToString(InputStream inputStream) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+        String line = "";
+        String result = "";
+        while((line = bufferedReader.readLine()) != null)
+            result += line;
+        inputStream.close();
+        return result;
+
     }
 }
