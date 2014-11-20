@@ -165,17 +165,14 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
                             }
                             initialize_view();
                             if((shell&etiquetillas&pañal)==orderAmount){
-
-                                confirmOrder.setEnabled(true);
+                                //confirmOrder.setEnabled(true);
                             }
                             else {
-
-                                confirmOrder.setEnabled(false);
+                                //confirmOrder.setEnabled(false);
                             }
                             Log.e("Orden Actual","Shell ="+Integer.toString(shell)+", Pañal="+Integer.toString(pañal)+", Etiquetillas"+Integer.toString(etiquetillas));
                             adapertOrderCode=new orderCodeAdapter(OrderCodeActivity.this,listOrderCode);
                             listViewOrderCode.setAdapter(adapertOrderCode);
-
                         }
                     })
                     .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -193,7 +190,6 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
 
         //orderString=prefs.getString("Product_"+newOrderCode.codeSerial,"");
     }

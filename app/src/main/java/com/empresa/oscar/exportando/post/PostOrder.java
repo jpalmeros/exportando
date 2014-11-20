@@ -4,8 +4,6 @@ package com.empresa.oscar.exportando.post;
  * Created by UsuarioRasa on 18/11/2014.
  */
 
-
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -15,11 +13,13 @@ import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +28,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
 
 public class PostOrder extends AsyncTask<Void, Void, String> {
     private ProgressDialog progressDialog;
@@ -84,8 +83,9 @@ public class PostOrder extends AsyncTask<Void, Void, String> {
             httpPost.setHeader("Accept-Encoding", "application/json");
             HttpResponse httpResponse = httpClient.execute(httpPost);
             inputStream = httpResponse.getEntity().getContent();
-            if (inputStream!=null) {
-                aux =convertInputStreamToString(inputStream);
+            HttpEntity entity = httpResponse.getEntity();
+            if (entity!=null) {
+                aux=EntityUtils.toString(entity);
                 Log.i("Registro de orden", "Registro posteado\n ");
             } else {
                 Log.e("Registro de orden", "fallo el Registro");
