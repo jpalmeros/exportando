@@ -78,6 +78,7 @@ public class PostOrder extends AsyncTask<Void, Void, String> {
             jsonPost.accumulate("order", postOrder);
             json = jsonPost.toString();
             StringEntity se = new StringEntity(json);
+            Log.e("Json a Enviar",json);
             httpPost.setEntity(se);
             httpPost.setHeader("Content-Type", "application/json");
             httpPost.setHeader("Accept-Encoding", "application/json");
@@ -90,10 +91,10 @@ public class PostOrder extends AsyncTask<Void, Void, String> {
             } else {
                 Log.e("Registro de orden", "fallo el Registro");
             }
-            Log.e("Toda la respuesta", aux);
-            jsonObject = new JSONObject(aux);
-            Log.e("Response", jsonObject.toString());
-            JSONObject login_response = jsonObject.getJSONObject("response");
+            Log.e("Toda la respuesta", inputStream.toString());
+            JSONObject jsonar= new JSONObject(aux);
+            Log.e("Response", jsonar.toString());
+            JSONObject login_response = jsonar.getJSONObject("response");
             Log.e("Response Object", login_response.toString());
             success = login_response.getString("success");
             error=false;
