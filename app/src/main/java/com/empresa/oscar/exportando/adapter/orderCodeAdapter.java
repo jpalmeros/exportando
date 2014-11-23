@@ -98,10 +98,13 @@ public class orderCodeAdapter extends BaseAdapter
                                         break;
                                 }
                                 if((OrderCodeActivity.shell&OrderCodeActivity.etiquetillas&OrderCodeActivity.pañal)==OrderCodeActivity.orderAmount){
-                                    //OrderCodeActivity.confirmOrder.setEnabled(true);
+                                    OrderCodeActivity.confirmOrder.setEnabled(true);
+                                    OrderCodeActivity.confirmOrder.setBackgroundResource(R.color.Boton);
                                 }
                                 else {
-                                    //OrderCodeActivity.confirmOrder.setEnabled(false);
+                                    OrderCodeActivity.confirmOrder.setEnabled(false);
+                                    OrderCodeActivity.confirmOrder.setBackgroundResource(R.color.Texto_1);
+
                                 }
                                 Log.e("Confirma", "Borrar Order Code");
                                 Log.e("Orden Actual","Shell ="+Integer.toString(OrderCodeActivity.shell)+", Pañal="+Integer.toString(OrderCodeActivity.pañal)+", Etiquetillas"+Integer.toString(OrderCodeActivity.etiquetillas));

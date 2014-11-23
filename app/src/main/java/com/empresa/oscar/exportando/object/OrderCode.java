@@ -13,7 +13,7 @@ public class OrderCode {
     public int codeOrderId;
     public OrderCode(int codeOrderId, int codeId, String codeSerial, int productId, int productType, String productName, int amount){
         this.codeOrderId=codeOrderId;
-        this. codeId=codeId;
+        this.codeId=codeId;
         this.codeSerial=codeSerial;
         this.productName=productName;
         this.productId=productId;

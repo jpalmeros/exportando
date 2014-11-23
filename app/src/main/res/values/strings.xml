@@ -22,13 +22,13 @@
     <string name="storageEntranceButton">Registrar</string>
     <string name="PrimeraEntrada">Primera Entrada</string>
     <string name="CrearOrden">Crear \nOrden</string>
-    <string name="ProductoOrden">Agregar Producto\na Orden</string>
+    <string name="ProductoOrden">Agregar Producto a Orden</string>
     <string name="CantidadOrden">Cantidad</string>
     <string name="Mermas">Mermas</string>
     <string name="AgregarOrderCode">Agregar\nProducto</string>
     <string name="CancelarOrden">Cancelar Orden</string>
     <string name="Atender">Atender</string>
-    <string name="Borrar">Borrar</string>
+    <string name="Borrar">X</string>
     <string name="AlmacenListo">Producto \nListo</string>
     <string name="ProductoNombre">Producto:</string>
     <string name="Disponibles">Disponibles:</string>

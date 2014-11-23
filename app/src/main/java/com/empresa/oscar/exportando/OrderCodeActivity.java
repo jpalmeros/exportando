@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.empresa.oscar.exportando.adapter.orderCodeAdapter;
 import com.empresa.oscar.exportando.get.GetProduct;
@@ -33,19 +34,20 @@ import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
 
 
-public class OrderCodeActivity extends Activity implements ZBarScannerView.ResultHandler{
+public class OrderCodeActivity extends Activity implements ZBarScannerView.ResultHandler {
     public static int orderAmount;
-    String orderString,usr,pass;
+    String orderString, usr, pass;
     JSONArray ordenArray;
     ArrayList<OrderCode> listOrderCode;
     orderCodeAdapter adapertOrderCode;
     ListView listViewOrderCode;
-    public static Button cancelOrder,addOrderCode,confirmOrder;
+    public static Button cancelOrder, addOrderCode, confirmOrder;
     SharedPreferences prefs;
     Product product;
-    public static int shell,pañal,etiquetillas;
+    public static int shell, pañal, etiquetillas;
     int user_id;
     private ZBarScannerView mScannerView;
+    boolean escaneando;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,55 +55,57 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
         setContentView(R.layout.activity_order_code);
 
         final Bundle bundle = getIntent().getExtras();
-        orderAmount= bundle.getInt("amount");
-        prefs = getSharedPreferences("Exporta",Activity.MODE_PRIVATE);
-        orderString=prefs.getString("orderString","");
-        usr=prefs.getString("Empleado",null);
-        pass=prefs.getString("Password",null);
-        user_id= prefs.getInt("Id",0);
+        orderAmount = bundle.getInt("amount");
+        prefs = getSharedPreferences("Exporta", Activity.MODE_PRIVATE);
+        orderString = prefs.getString("orderString", "");
+        usr = prefs.getString("Empleado", null);
+        pass = prefs.getString("Password", null);
+        user_id = prefs.getInt("Id", 0);
         Log.e("order code", orderString);
-        pañal=0;
-        shell=0;
-        etiquetillas=0;
+        pañal = 0;
+        shell = 0;
+        etiquetillas = 0;
+        escaneando = false;
 
-        listOrderCode=new ArrayList<OrderCode>();
+        listOrderCode = new ArrayList<OrderCode>();
 
-        cancelOrder=(Button)findViewById(R.id.cancelar_orden);
-        confirmOrder=(Button)findViewById(R.id.confirmar_orden);
-        addOrderCode=(Button)findViewById(R.id.agregar_producto);
-        listViewOrderCode=(ListView)findViewById(R.id.ordercodes);
+        cancelOrder = (Button) findViewById(R.id.cancelar_orden);
+        confirmOrder = (Button) findViewById(R.id.confirmar_orden);
+        addOrderCode = (Button) findViewById(R.id.agregar_producto);
+        listViewOrderCode = (ListView) findViewById(R.id.ordercodes);
         confirmOrder.setEnabled(false);
         mScannerView = new ZBarScannerView(this);    // Programmatically initialize the scanner view
 
-        Log.e("Orden Actual","Shell ="+Integer.toString(shell)+", Pañal="+Integer.toString(pañal)+", Etiquetillas"+Integer.toString(etiquetillas));
+        Log.e("Orden Actual", "Shell =" + Integer.toString(shell) + ", Pañal=" + Integer.toString(pañal) + ", Etiquetillas" + Integer.toString(etiquetillas));
 
         addOrderCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setContentView(mScannerView);
+                escaneando = true;
             }
         });
 
         confirmOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JSONArray postOrder= new JSONArray();
-                JSONObject postOrderAmount=new JSONObject();
+                JSONArray postOrder = new JSONArray();
+                JSONObject postOrderAmount = new JSONObject();
                 try {
-                    postOrderAmount.put("order_amount",Integer.toString(orderAmount));
+                    postOrderAmount.put("order_amount", Integer.toString(orderAmount));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 JSONArray orderCodes = new JSONArray();
-                for (OrderCode ordercode : listOrderCode){
-                    JSONObject ob=new JSONObject();
+                for (OrderCode ordercode : listOrderCode) {
+                    JSONObject ob = new JSONObject();
                     try {
-                        ob.put("code_id",ordercode.codeId);
-                        ob.put("product_id",ordercode.productId);
-                        ob.put("product_type_id",ordercode.productType);
-                        ob.put("product_amount",ordercode.amount);
-                        ob.put("code_value_serial",ordercode.codeSerial);
-                        ob.put("product_name",ordercode.productName);
+                        ob.put("code_id", ordercode.codeId);
+                        ob.put("product_id", ordercode.productId);
+                        ob.put("product_type_id", ordercode.productType);
+                        ob.put("product_amount", ordercode.amount);
+                        ob.put("code_value_serial", ordercode.codeSerial);
+                        ob.put("product_name", ordercode.productName);
                         orderCodes.put(ob);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -109,8 +113,8 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
                 }
                 postOrder.put(postOrderAmount);
                 postOrder.put(orderCodes);
-                Log.e("order codes a registrar",postOrder.toString());
-                new PostOrder(OrderCodeActivity.this,postOrder).execute();
+                Log.e("order codes a registrar", postOrder.toString());
+                new PostOrder(OrderCodeActivity.this, postOrder).execute();
                 mScannerView.stopCamera();
                 finish();
             }
@@ -121,17 +125,18 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
     @Override
     public void handleResult(Result result) {
         mScannerView.stopCamera();
+        escaneando = false;
         //
         String scanContent = result.getContents();
-        String []tmp=scanContent.split(" ");
-        Log.e("Codigo",scanContent);
-        Log.e("Codigo",tmp[0]);
+        String[] tmp = scanContent.split(" ");
+        Log.e("Codigo", scanContent);
+        Log.e("Codigo", tmp[0]);
         try {
-            product=new GetProduct(OrderCodeActivity.this,usr,pass,user_id,Integer.parseInt(tmp[0])).execute().get();
+            product = new GetProduct(OrderCodeActivity.this, usr, pass, user_id, Integer.parseInt(tmp[0])).execute().get();
 
             final AlertDialog.Builder builder = new AlertDialog.Builder(OrderCodeActivity.this);
             LayoutInflater inflater = OrderCodeActivity.this.getLayoutInflater();
-            final View dialogView =inflater.inflate(R.layout.product_dialog, null);
+            final View dialogView = inflater.inflate(R.layout.product_dialog, null);
             TextView serial = (TextView) dialogView.findViewById(R.id.SerialValue);
             final TextView producto = (TextView) dialogView.findViewById(R.id.ProductoValue);
             TextView disponibles = (TextView) dialogView.findViewById(R.id.DisponiblesValue);
@@ -145,39 +150,34 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
                             EditText inputAmount = (EditText) dialogView.findViewById(R.id.order_amount);
-                            int amount=Integer.parseInt(inputAmount.getText().toString());
-                            Log.e("Cantidad de Producto",Integer.toString(amount));
-                            OrderCode actualorderCode=new OrderCode(0,product.getCodeId(),product.getCodeValueSerial(),
-                                    product.getProductId(),product.getProductTypeId(),product.getProductName(),
+                            int amount = Integer.parseInt(inputAmount.getText().toString());
+                            Log.e("Cantidad de Producto", Integer.toString(amount));
+                            OrderCode actualorderCode = new OrderCode(0, product.getCodeId(), product.getCodeValueSerial(),
+                                    product.getProductId(), product.getProductTypeId(), product.getProductName(),
                                     amount);
                             listOrderCode.add(actualorderCode);
-                            int type=actualorderCode.productType;
-                            switch (type){
+                            int type = actualorderCode.productType;
+                            switch (type) {
                                 case 1:
-                                    shell+=amount;
+                                    shell += amount;
                                     break;
                                 case 2:
-                                    etiquetillas+=amount;
+                                    etiquetillas += amount;
                                     break;
                                 case 3:
-                                    pañal+=amount;
+                                    pañal += amount;
                                     break;
                             }
                             initialize_view();
-                            if((shell&etiquetillas&pañal)==orderAmount){
-                                //confirmOrder.setEnabled(true);
-                            }
-                            else {
-                                //confirmOrder.setEnabled(false);
-                            }
-                            Log.e("Orden Actual","Shell ="+Integer.toString(shell)+", Pañal="+Integer.toString(pañal)+", Etiquetillas"+Integer.toString(etiquetillas));
-                            adapertOrderCode=new orderCodeAdapter(OrderCodeActivity.this,listOrderCode);
+
+                            Log.e("Orden Actual", "Shell =" + Integer.toString(shell) + ", Pañal=" + Integer.toString(pañal) + ", Etiquetillas" + Integer.toString(etiquetillas));
+                            adapertOrderCode = new orderCodeAdapter(OrderCodeActivity.this, listOrderCode);
                             listViewOrderCode.setAdapter(adapertOrderCode);
                         }
                     })
                     .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            Log.e("Cantidad de Producto","Cancelada");
+                            Log.e("Cantidad de Producto", "Cancelada");
                             mScannerView.startCamera();
                             setContentView(mScannerView);
                         }
@@ -197,37 +197,54 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
     private void initialize_view() {
         mScannerView.startCamera();
         setContentView(R.layout.activity_order_code);
-        cancelOrder=(Button)findViewById(R.id.cancelar_orden);
-        addOrderCode=(Button)findViewById(R.id.agregar_producto);
-        listViewOrderCode=(ListView)findViewById(R.id.ordercodes);
-        confirmOrder=(Button)findViewById(R.id.confirmar_orden);
+        cancelOrder = (Button) findViewById(R.id.cancelar_orden);
+        addOrderCode = (Button) findViewById(R.id.agregar_producto);
+        listViewOrderCode = (ListView) findViewById(R.id.ordercodes);
+        confirmOrder = (Button) findViewById(R.id.confirmar_orden);
 
+        Log.e("Orden Actual", "Shell =" + Integer.toString(shell) + ", Pañal=" + Integer.toString(pañal) + ", Etiquetillas" + Integer.toString(etiquetillas));
+
+
+        if ((shell & etiquetillas & pañal) == orderAmount) {
+            confirmOrder.setEnabled(true);
+            confirmOrder.setBackgroundResource(R.color.Boton);
+        } else {
+            confirmOrder.setEnabled(false);
+            confirmOrder.setBackgroundResource(R.color.Texto_1);
+        }
         addOrderCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setContentView(mScannerView);
+                escaneando = true;
+            }
+        });
+        cancelOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
         confirmOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JSONArray postOrder= new JSONArray();
-                JSONObject postOrderAmount=new JSONObject();
+                JSONArray postOrder = new JSONArray();
+                JSONObject postOrderAmount = new JSONObject();
                 try {
-                    postOrderAmount.put("order_amount",Integer.toString(orderAmount));
+                    postOrderAmount.put("order_amount", Integer.toString(orderAmount));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 JSONArray orderCodes = new JSONArray();
-                for (OrderCode ordercode : listOrderCode){
-                    JSONObject ob=new JSONObject();
+                for (OrderCode ordercode : listOrderCode) {
+                    JSONObject ob = new JSONObject();
                     try {
-                        ob.put("code_id",ordercode.codeId);
-                        ob.put("product_id",ordercode.productId);
-                        ob.put("product_type_id",ordercode.productType);
-                        ob.put("product_amount",ordercode.amount);
-                        ob.put("code_value_serial",ordercode.codeSerial);
-                        ob.put("product_name",ordercode.productName);
+                        ob.put("code_id", ordercode.codeId);
+                        ob.put("product_id", ordercode.productId);
+                        ob.put("product_type_id", ordercode.productType);
+                        ob.put("product_amount", ordercode.amount);
+                        ob.put("code_value_serial", ordercode.codeSerial);
+                        ob.put("product_name", ordercode.productName);
                         orderCodes.put(ob);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -236,11 +253,23 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
                 postOrder.put(postOrderAmount);
                 postOrder.put(orderCodes);
                 Log.e("order codes a registrar", postOrder.toString());
-                new PostOrder(OrderCodeActivity.this,postOrder).execute();
-                mScannerView.stopCamera();
-                finish();
+                boolean error = false;
+                try {
+                    error=new PostOrder(OrderCodeActivity.this, postOrder).execute().get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                if (error){
+                    Toast.makeText(OrderCodeActivity.this, " Orden Fallida ", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(OrderCodeActivity.this, " Orden Registrada ", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+        escaneando=false;
     }
 
     @Override
@@ -287,9 +316,14 @@ public class OrderCodeActivity extends Activity implements ZBarScannerView.Resul
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
-        mScannerView.stopCamera();
 
+        if (escaneando) {
+            initialize_view();
+        } else {
+            super.onBackPressed();
+            mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
+            mScannerView.stopCamera();
+
+        }
     }
 }

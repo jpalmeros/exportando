@@ -7,92 +7,110 @@
     android:background="@color/Fondo">
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:gravity="top"
         android:layout_weight="1">
         <TextView
             android:id="@+id/title"
             android:text="@string/ProductoOrden"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/Texto_1"
             android:layout_centerHorizontal="true"
-            android:textAlignment="center"
             android:textSize="26sp"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:textStyle="bold"
             android:layout_marginTop="40dp"/>
 
-        <TextView
-            android:id="@+id/SerialHeader"
-            android:text="@string/Serial"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/layoutSerial"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/Texto_1"
-            android:textSize="20sp"
-            android:layout_margin="5dp"
-            android:textStyle="bold"
-            android:layout_below="@id/title"
-            android:layout_marginTop="5dp"/>
-        <TextView
-            android:id="@+id/SerialValue"
-            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/title">
+            <TextView
+                android:id="@+id/SerialHeader"
+                android:text="@string/Serial"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textColor="@color/Texto_1"
+                android:textSize="20sp"
+                android:layout_margin="5dp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:id="@+id/SerialValue"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/Texto_1"
+                android:textSize="20sp"
+                android:layout_margin="5dp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"/>
+            </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutProducto"
+            android:layout_below="@id/layoutSerial"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/Texto_1"
-            android:textSize="20sp"
-            android:layout_margin="5dp"
-            android:textStyle="bold"
-            android:layout_below="@id/title"
-            android:layout_toRightOf="@id/SerialHeader"
-            android:layout_toEndOf="@id/SerialHeader"
-            android:layout_marginTop="5dp"/>
-        <TextView
-            android:id="@+id/ProductoHeader"
-            android:text="@string/ProductoNombre"
-            android:layout_width="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/ProductoHeader"
+                android:text="@string/ProductoNombre"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Texto_1"
+                android:textSize="20sp"
+                android:layout_margin="5dp"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:id="@+id/ProductoValue"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Texto_1"
+                android:textSize="20sp"
+                android:layout_margin="5dp"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"/>
+            </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutDisponible"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/Texto_1"
-            android:textSize="20sp"
-            android:layout_margin="5dp"
-            android:textStyle="bold"
-            android:layout_below="@id/SerialHeader"
-            android:layout_marginTop="5dp"/>
-        <TextView
-            android:id="@+id/ProductoValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/Texto_1"
-            android:textSize="20sp"
-            android:layout_margin="5dp"
-            android:textStyle="bold"
-            android:layout_below="@id/SerialHeader"
-            android:layout_toRightOf="@id/ProductoHeader"
-            android:layout_toEndOf="@id/ProductoHeader"
-            android:layout_marginTop="5dp"/>
-        <TextView
-            android:id="@+id/DisponiblesHeader"
-            android:text="@string/Disponibles"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/Texto_1"
-            android:textSize="20sp"
-            android:layout_margin="5dp"
-            android:textStyle="bold"
-            android:layout_below="@id/ProductoHeader"
-            android:layout_marginTop="5dp"/>
-        <TextView
-            android:id="@+id/DisponiblesValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/Texto_1"
-            android:textSize="20sp"
-            android:layout_margin="5dp"
-            android:textStyle="bold"
-            android:layout_below="@id/ProductoHeader"
-            android:layout_toRightOf="@id/DisponiblesHeader"
-            android:layout_toEndOf="@id/DisponiblesHeader"
-            android:layout_marginTop="5dp"/>
+            android:orientation="horizontal"
+            android:layout_below="@id/layoutProducto">
+
+            <TextView
+                android:id="@+id/DisponiblesHeader"
+                android:text="@string/Disponibles"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/Texto_1"
+                android:textSize="20sp"
+                android:layout_margin="5dp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:id="@+id/DisponiblesValue"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/Texto_1"
+                android:textSize="20sp"
+                android:layout_margin="5dp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"/>
+            </LinearLayout>
+
     </RelativeLayout>
 
 
