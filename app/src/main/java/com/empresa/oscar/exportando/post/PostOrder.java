@@ -24,12 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-public class PostOrder extends AsyncTask<Void, Void, String> {
+public class PostOrder extends AsyncTask<Void, Void, Boolean> {
     private ProgressDialog progressDialog;
     private HttpClient httpClient;
     private HttpPost httpPost;
@@ -54,11 +49,10 @@ public class PostOrder extends AsyncTask<Void, Void, String> {
     }
 
     @Override
-    protected String doInBackground(Void... arg0) {
+    protected Boolean doInBackground(Void... arg0) {
         String aux="";
-        JSONObject jsonObject;
-        InputStream inputStream;
-        String json="";
+        String json;
+        Boolean error;
 
         SharedPreferences prefs = context.getSharedPreferences("Exporta", Activity.MODE_PRIVATE);
         String usr = prefs.getString("Empleado", null);
@@ -74,16 +68,18 @@ public class PostOrder extends AsyncTask<Void, Void, String> {
             httpClient = new DefaultHttpClient();
             httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/postOrder.php");
             JSONObject jsonPost = new JSONObject();
-            jsonPost.accumulate("user", usuario);
-            jsonPost.accumulate("order", postOrder);
+            jsonPost.put("user", usuario);
+            jsonPost.put("order", postOrder);
             json = jsonPost.toString();
             StringEntity se = new StringEntity(json);
-            Log.e("Json a Enviar",json);
-            httpPost.setEntity(se);
+            Log.e("Json a Enviar", json);
+            httpPost.setHeader("Accept", "application/json");
             httpPost.setHeader("Content-Type", "application/json");
-            httpPost.setHeader("Accept-Encoding", "application/json");
+            httpPost.setHeader("Accept-Encoding", "application/json; charset=UTF-8");
+            httpPost.setHeader("Accept-Language","es-MX");
+            httpPost.setEntity(se);
+            Log.e("post", se.toString());
             HttpResponse httpResponse = httpClient.execute(httpPost);
-            inputStream = httpResponse.getEntity().getContent();
             HttpEntity entity = httpResponse.getEntity();
             if (entity!=null) {
                 aux=EntityUtils.toString(entity);
@@ -91,7 +87,7 @@ public class PostOrder extends AsyncTask<Void, Void, String> {
             } else {
                 Log.e("Registro de orden", "fallo el Registro");
             }
-            Log.e("Toda la respuesta", inputStream.toString());
+            Log.e("Toda la respuesta",aux);
             JSONObject jsonar= new JSONObject(aux);
             Log.e("Response", jsonar.toString());
             JSONObject login_response = jsonar.getJSONObject("response");
@@ -102,15 +98,14 @@ public class PostOrder extends AsyncTask<Void, Void, String> {
             error = true;
             Log.e("error", ex.toString());
             authorization="error";
-            return authorization;
         }
         authorization="exito";
-        return authorization;
+        return error;
     }
 
     @TargetApi(Build.VERSION_CODES.CUPCAKE)
-    protected void onPostExecute(String result) {
-        super.onPostExecute(result);
+    protected void onPostExecute(Boolean error) {
+        super.onPostExecute(error);
         progressDialog.hide();
         if (!error) {
             Log.d("Orden", "Datos correctos");
@@ -118,20 +113,14 @@ public class PostOrder extends AsyncTask<Void, Void, String> {
             Log.d("Orden", "Datos incorrectos");
         }
         progressDialog.dismiss();
-        if (success.equals("exito")) {
-            Toast.makeText(context, " Orden Registrada ", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(context, "Error al registrar la Orden", Toast.LENGTH_SHORT).show();
+        if(success!=null){
+            if (success.equals("exito")) {
+                Toast.makeText(context, " Orden Registrada ", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "Error al registrar la Orden", Toast.LENGTH_SHORT).show();
+            }
         }
-    }
-    private static String convertInputStreamToString(InputStream inputStream) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
-        String line = "";
-        String result = "";
-        while((line = bufferedReader.readLine()) != null)
-            result += line;
-        inputStream.close();
-        return result;
 
     }
+
 }
