@@ -23,64 +23,40 @@
             android:layout_height="wrap_content"
             android:textColor="@color/Texto_1"
             android:layout_centerHorizontal="true"
-            android:textSize="42dp"
+            android:textSize="42sp"
             android:textStyle="bold"
+            android:inputType="number"
             android:layout_marginTop="5dp"/>
         <RelativeLayout
             android:id="@+id/valuesCompra"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp">
 
             <TextView
-                android:id="@+id/id_compra"
-                android:text="@string/Compra"
+                android:id="@+id/order_token"
+                android:text="@string/Orden"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/Texto_1"
-                android:textSize="27dp"
-                android:layout_marginTop="0dp"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="28sp"
                 android:textStyle="bold"/>
-
             <TextView
-                android:id="@+id/id_compra_value_delivery"
+                android:id="@+id/order_token_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/Texto_1"
                 android:layout_centerHorizontal="true"
-                android:textSize="28dp"
-                android:layout_toRightOf="@id/id_compra"
+                android:textSize="22sp"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/order_token"
                 android:textStyle="bold"/>
         </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/valuesCaja"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/valuesCompra"
-            android:layout_centerHorizontal="true">
-            <TextView
-                android:id="@+id/caja"
-                android:text="@string/Caja"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/Texto_1"
-                android:textSize="24dp"
-                android:layout_marginTop="10dp"
-                android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/caja_value_delivery"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/Texto_1"
-                android:textSize="28dp"
-                android:layout_marginTop="10dp"
-                android:layout_toRightOf="@id/caja"
-                android:textStyle="bold"/>
-        </RelativeLayout>
     </RelativeLayout>
     <LinearLayout
         android:layout_width="fill_parent"
@@ -105,7 +81,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="13dp"
             android:orientation="horizontal">
-
 
             <EditText
                 android:id="@+id/amount_delivery"

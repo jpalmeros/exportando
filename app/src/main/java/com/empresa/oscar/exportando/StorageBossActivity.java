@@ -26,12 +26,26 @@ public class StorageBossActivity extends Activity {
         entrance_button=(Button)findViewById(R.id.primera_entrada);
         ready_button=(Button)findViewById(R.id.producto_listo);
         order_button=(Button)findViewById(R.id.crear_orden);
-        loss_button=(Button)findViewById(R.id.mermas);
+        loss_button=(Button)findViewById(R.id.perdidas);
 
         SharedPreferences prefs = getSharedPreferences("Exporta",Activity.MODE_PRIVATE);
         nick=prefs.getString("Empleado",null);
         pass=prefs.getString("Password",null);
         type=prefs.getString("Type",null);
+
+        loss_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent Mermas = new Intent(StorageBossActivity.this, LossActivity.class);
+                Mermas.putExtra("nick",nick);
+                Mermas.putExtra("pass",pass);
+                Mermas.putExtra("type",type);
+                Mermas.putExtra("process","entrance");
+                Mermas.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Mermas.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(Mermas);
+            }
+        });
 
         entrance_button.setOnClickListener(new View.OnClickListener() {
             @Override

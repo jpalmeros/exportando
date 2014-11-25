@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import me.dm7.barcodescanner.zbar.ZBarScannerView;
+
 /**
  * Created by UsuarioRasa on 06/10/2014.
  */
@@ -34,17 +36,16 @@ public class PostStorageReception extends AsyncTask<Void, Void, String> {
     private List<NameValuePair> nameValuePairs;
     private ResponseHandler<String> responseHandler;
     private Activity context;
-    private boolean error;
+    private boolean error,escaneando,delivery,reception;
     private String serial, success, status;
-    private int purchase_id, code_id, amount, user_id,full,empty;
+    private int amount, user_id,full,empty;
     int location_id;
+
     String  authorization;
 
 
-    PostStorageReception(Activity context, int purchase_id, int code_id, String serial, int user_id, int amount,int location_id,int full,int empty) {
+    public PostStorageReception(Activity context, String serial, int user_id, int amount, int location_id, int full, int empty) {
         this.context = context;
-        this.purchase_id = purchase_id;
-        this.code_id = code_id;
         this.user_id = user_id;
         this.serial = serial;
         this.amount = amount;
@@ -76,16 +77,16 @@ public class PostStorageReception extends AsyncTask<Void, Void, String> {
         //post para obtener los dominios
         try {
             httpClient = new DefaultHttpClient();
-            httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/entrega.php");
+            httpPost = new HttpPost("http://crisoldeideas.com/exporta/api_layer/postReception.php");
             nameValuePairs = new ArrayList<NameValuePair>(1);
             nameValuePairs.add(new BasicNameValuePair("employee_nickname", usr));
             nameValuePairs.add(new BasicNameValuePair("employee_password", pass));
             nameValuePairs.add(new BasicNameValuePair("reception_employee_id", Integer.toString(user_id)));
-            nameValuePairs.add(new BasicNameValuePair("reception_code_id", Integer.toString(code_id)));
+            //nameValuePairs.add(new BasicNameValuePair("reception_code_id", Integer.toString(code_id)));
             nameValuePairs.add(new BasicNameValuePair("reception_date", get_fecha()));
             nameValuePairs.add(new BasicNameValuePair("reception_amount", Integer.toString(amount)));
             nameValuePairs.add(new BasicNameValuePair("reception_location_id", Integer.toString(location_id)));
-            nameValuePairs.add(new BasicNameValuePair("reception_purchase_id", Integer.toString(purchase_id)));
+            //nameValuePairs.add(new BasicNameValuePair("reception_purchase_id", Integer.toString(purchase_id)));
             nameValuePairs.add(new BasicNameValuePair("reception_value_serial", serial));
             nameValuePairs.add(new BasicNameValuePair("reception_full", Integer.toString(full)));
             nameValuePairs.add(new BasicNameValuePair("reception_empty", Integer.toString(empty)));
@@ -104,10 +105,7 @@ public class PostStorageReception extends AsyncTask<Void, Void, String> {
             Log.e("Response", jsonObject.toString());
             JSONObject login_response = jsonObject.getJSONObject("response");
             Log.e("Response Object", login_response.toString());
-
-
             success = login_response.getString("success");
-            status = login_response.getString("status");
 
         } catch (Exception ex) {
             error = true;
@@ -131,8 +129,6 @@ public class PostStorageReception extends AsyncTask<Void, Void, String> {
         progressDialog.dismiss();
         if (success.equals("exito")) {
             Toast.makeText(context, " Entrega Registrada ", Toast.LENGTH_SHORT).show();
-
-
         } else {
             Toast.makeText(context, "Error al registrar la Entrega", Toast.LENGTH_SHORT).show();
         }

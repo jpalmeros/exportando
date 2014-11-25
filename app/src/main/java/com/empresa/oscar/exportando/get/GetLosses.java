@@ -18,6 +18,7 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,29 +70,36 @@ public class GetLosses extends AsyncTask<Void, Void, ArrayList> {
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             responseHandler = new BasicResponseHandler();
             response = httpClient.execute(httpPost, responseHandler);
-            aux= response.toString();
+            aux= response;
 
             if (aux != null) {
-                Log.i("Locaciones", "Pidiendo Locaciones \n ");
+                Log.i("Mermas", "Pidiendo Mermas \n ");
             } else {
-                Log.e("Locaciones","fallaron las locaciones");
+                Log.e("Mermas","fallaron las mermas");
             }
 
-            JSONArray purchases = new JSONArray(aux);
+            JSONArray losses = new JSONArray(aux);
 
-            Log.e("Response", purchases.toString());
-            Log.e("Tamaño locaciones", String.valueOf(purchases.length()));
-            for (int i = 0; i < purchases.length(); i++) {
-                /*
-                JSONObject purchase = purchases.getJSONObject(i);
-                Log.e("Tamaño Compras",Integer.toString( purchase.getInt("purchase_id"))+purchase.getString("purchase_date"));
-                int purchase_id=purchase.getInt("order_id");
-                int purchase_amount=purchase.getInt("_unit");
-                String provider_name=purchase.getString("provider_name");
-                String product_name=purchase.getString("product_name");
-                String purchase_date=purchase.getString("purchase_date");
-                listaLosses.add(new Loss(provider_name,product_name,purchase_date,purchase_amount,purchase_id));
-                */
+            Log.e("Response", losses.toString());
+            Log.e("Tamaño mermas", String.valueOf(losses.length()));
+            for (int i = 0; i < losses.length(); i++) {
+
+                JSONObject loss = losses.getJSONObject(i);
+                int loss_id=loss.getInt("loss_id");
+                int loss_order_id=loss.getInt("loss_order_id");
+                int loss_amount=loss.getInt("loss_amount");
+                int loss_location_id=loss.getInt("loss_location_id");
+                int loss_delivery_id=loss.getInt("loss_delivery_id");
+                String loss_location_name=loss.getString("loss_location_name");
+                int loss_user_id=loss.getInt("loss_user_id");
+                String loss_user_nickname=loss.getString("loss_user_nickname");
+                int loss_type_id=loss.getInt("loss_type_id");
+                String loss_order_token=loss.getString("loss_order_token");
+                String loss_type_name=loss.getString("loss_type_name");
+                boolean loss_status=Boolean.parseBoolean(loss.getString("loss_status"));
+                String loss_date=loss.getString("loss_date");
+                listaLosses.add(new Loss(loss_order_id,loss_order_token,loss_location_id,loss_location_name,loss_type_id
+                ,loss_type_name,loss_user_id,loss_user_nickname,loss_amount,loss_id,loss_status,loss_date,loss_delivery_id));
             }
 
         } catch (Exception ex) {

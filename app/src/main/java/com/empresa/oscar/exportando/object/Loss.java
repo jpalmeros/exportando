@@ -17,9 +17,9 @@ public class Loss {
     public boolean status;
     public String fecha;
     public int delivery_id;
-    Loss(int order_id,String orden_token,int locacion_id,String locacion_name,
-         int tipo_id, String tipo_name, int usuario_id, String usuario_name, int cantidad,
-         int merma_id,boolean status,String fecha,int delivery_id){
+    public Loss(int order_id, String orden_token, int locacion_id, String locacion_name,
+                int tipo_id, String tipo_name, int usuario_id, String usuario_name, int cantidad,
+                int merma_id, boolean status, String fecha, int delivery_id){
         this.order_id=order_id;
         this.order_token=orden_token;
         this.locacion_id=locacion_id;

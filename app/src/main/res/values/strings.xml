@@ -13,6 +13,7 @@
     <string name="cancel_button">Cancel</string>
     <string name="Caja">Caja: </string>
     <string name="Compra">Compra</string>
+    <string name="Orden">Orden</string>
     <string name="Recibido">Recibido </string>
     <string name="Serial">Serial: </string>
     <string name="Entrega">Entrega </string>

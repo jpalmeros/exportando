@@ -25,8 +25,8 @@ import java.util.concurrent.ExecutionException;
 
 public class ProductDelivery extends Activity {
     private ArrayList<Locacion> ListaLocaciones;
-    private int user_id,id_compra_value,caja_value,id_code_value;
-    private TextView compra,caja;
+    private int user_id,id_compra_value,id_code_value;
+    private TextView token_value;
     private String code_value_serial,pass,usr,responsePost;
     private locacionAdapter locAdapter;
     private Spinner locSpinner;
@@ -37,29 +37,19 @@ public class ProductDelivery extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_delivery);
-        compra=(TextView)findViewById(R.id.id_compra_value_delivery);
-        caja=(TextView)findViewById(R.id.caja_value_delivery);
+        token_value=(TextView)findViewById(R.id.order_token_value);
         boton_recepcion=(Button)findViewById(R.id.btn_recepcion_delivery);
         texto_amount=(EditText)findViewById(R.id.amount_delivery);
-
         full = (CheckBox) findViewById(R.id.lleno_delivery);
-
-
         final Bundle bundle = getIntent().getExtras();
-        id_code_value= bundle.getInt("code_id");
-        id_compra_value= bundle.getInt("purchase_id");
-        caja_value = bundle.getInt("purchase_box");
         code_value_serial = bundle.getString("code_value_serial");
-
-        Log.e("sacando valores",id_code_value+"-"+id_compra_value+"-"+caja_value+"-"+code_value_serial);
-
+        Log.e("Token de orden",code_value_serial);
         SharedPreferences prefs = getSharedPreferences("Exporta", Activity.MODE_PRIVATE);
         usr=prefs.getString("Empleado",null);
         pass=prefs.getString("Password",null);
         user_id= prefs.getInt("Id",0);
 
-        caja.setText(String.valueOf(caja_value));
-        compra.setText(String.valueOf(id_compra_value));
+        token_value.setText(code_value_serial);
 
         try {
             ListaLocaciones=new GetLocations(this,usr,pass,user_id).execute().get();
@@ -95,7 +85,7 @@ public class ProductDelivery extends Activity {
                     Locacion loc = (Locacion) locSpinner.getSelectedItem();
                     int int_amount = Integer.parseInt(cadena_amount);
                     try {
-                        responsePost=new PostStorageDelivery(ProductDelivery.this, id_compra_value, id_code_value, code_value_serial, user_id, int_amount, loc.getIndiceLocacion(),lleno,vacio).execute().get();
+                        responsePost=new PostStorageDelivery(ProductDelivery.this,code_value_serial, user_id, int_amount, loc.getIndiceLocacion(),lleno,vacio).execute().get();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     } catch (ExecutionException e) {

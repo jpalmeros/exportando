@@ -77,29 +77,7 @@ public class lossAdapter extends BaseAdapter
             @Override
             public void onClick(View view) {
 
-                final Loss actualloss=items.get(position);
 
-                new AlertDialog.Builder(activity)
-                        .setTitle(R.string.RecepcionCompra)
-                        .setMessage(R.string.ConfirmaRecepcionCompra)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                String exito="";
-                                // continue with delete
-
-
-                                Log.e("Atendiendo", "Merma " + Integer.toString(actualloss.getLossId()));
-
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
-                                Log.e("Cancela", "merma " + Integer.toString(actualloss.getLossId()));
-                            }
-                        })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
 
             }
         });

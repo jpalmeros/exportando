@@ -17,6 +17,7 @@ import com.empresa.oscar.exportando.adapter.locacionAdapter;
 import com.empresa.oscar.exportando.get.GetLocations;
 import com.empresa.oscar.exportando.object.Locacion;
 import com.empresa.oscar.exportando.post.PostStorageDelivery;
+import com.empresa.oscar.exportando.post.PostStorageReception;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -25,7 +26,7 @@ import java.util.concurrent.ExecutionException;
 public class ProductReception extends Activity {
     private ArrayList<Locacion> ListaLocaciones;
     private int user_id,id_compra_value,caja_value,id_code_value;
-    private TextView compra,caja;
+    private TextView token_value;
     private locacionAdapter locAdapter;
     private Spinner locSpinner;
     private Button boton_recepcion;
@@ -36,17 +37,11 @@ public class ProductReception extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_reception);
-        compra=(TextView)findViewById(R.id.id_compra_value_reception);
-        caja=(TextView)findViewById(R.id.caja_value_reception);
+        token_value=(TextView)findViewById(R.id.order_token_value);
         boton_recepcion=(Button)findViewById(R.id.btn_recepcion);
         texto_amount=(EditText)findViewById(R.id.amount_reception);
-
         full = (CheckBox) findViewById(R.id.lleno_reception);
-
         final Bundle bundle = getIntent().getExtras();
-        id_code_value= bundle.getInt("code_id");
-        id_compra_value= bundle.getInt("purchase_id");
-        caja_value = bundle.getInt("purchase_box");
         code_value_serial = bundle.getString("code_value_serial");
 
         SharedPreferences prefs = getSharedPreferences("Exporta", Activity.MODE_PRIVATE);
@@ -54,8 +49,7 @@ public class ProductReception extends Activity {
         pass=prefs.getString("Password",null);
         user_id=prefs.getInt("Id",0);
 
-        caja.setText(String.valueOf(caja_value));
-        compra.setText(String.valueOf(id_compra_value));
+        token_value.setText(code_value_serial);
 
         try {
             ListaLocaciones=new GetLocations(this,usr,pass,user_id).execute().get();
@@ -73,7 +67,6 @@ public class ProductReception extends Activity {
             @Override
             public void onClick(View view) {
                 String cadena_amount = texto_amount.getText().toString();
-
                 if(TextUtils.isEmpty(cadena_amount)){
                     texto_amount.setError("Debes ingresar un valor adecuado");
                     return;
@@ -91,13 +84,12 @@ public class ProductReception extends Activity {
                     Locacion loc=(Locacion)locSpinner.getSelectedItem();
                     int int_amount=Integer.parseInt(cadena_amount);
                     try {
-                        responsePost=new PostStorageDelivery(ProductReception.this,id_compra_value,id_code_value,code_value_serial,user_id,int_amount,loc.getIndiceLocacion(),lleno,vacio).execute().get();
+                        responsePost=new PostStorageReception(ProductReception.this,code_value_serial,user_id,int_amount,loc.getIndiceLocacion(),lleno,vacio).execute().get();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     }
-
                     if(responsePost.equals("exito")){
                         finish();
                     }

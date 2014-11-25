@@ -41,10 +41,8 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
     String authorization;
 
 
-    public PostStorageDelivery(Activity context, int purchase_id, int code_id, String serial, int user_id, int amount, int location_id, int full, int empty) {
+    public PostStorageDelivery(Activity context, String serial, int user_id, int amount, int location_id, int full, int empty) {
         this.context = context;
-        this.purchase_id = purchase_id;
-        this.code_id = code_id;
         this.user_id = user_id;
         this.serial = serial;
         this.amount = amount;
@@ -82,19 +80,18 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
             nameValuePairs.add(new BasicNameValuePair("employee_nickname", usr));
             nameValuePairs.add(new BasicNameValuePair("employee_password", pass));
             nameValuePairs.add(new BasicNameValuePair("delivery_employee_id", Integer.toString(user_id)));
-            nameValuePairs.add(new BasicNameValuePair("delivery_code_id", Integer.toString(code_id)));
+            //nameValuePairs.add(new BasicNameValuePair("delivery_code_id", Integer.toString(code_id)));
             nameValuePairs.add(new BasicNameValuePair("delivery_date", get_fecha()));
             nameValuePairs.add(new BasicNameValuePair("delivery_amount", Integer.toString(amount)));
             nameValuePairs.add(new BasicNameValuePair("delivery_location_id", Integer.toString(location_id)));
-            nameValuePairs.add(new BasicNameValuePair("delivery_purchase_id", Integer.toString(purchase_id)));
+            //nameValuePairs.add(new BasicNameValuePair("delivery_purchase_id", Integer.toString(purchase_id)));
             nameValuePairs.add(new BasicNameValuePair("delivery_full", Integer.toString(full)));
             nameValuePairs.add(new BasicNameValuePair("delivery_empty", Integer.toString(empty)));
             nameValuePairs.add(new BasicNameValuePair("delivery_value_serial", serial));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             responseHandler = new BasicResponseHandler();
             response = httpClient.execute(httpPost, responseHandler);
-            aux = response.toString();
-
+            aux = response;
             if (aux != null) {
                 Log.i("Registro de almacen", "Registro posteado\n ");
             } else {
@@ -106,6 +103,7 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
             JSONObject login_response = jsonObject.getJSONObject("response");
             Log.e("Response Object", login_response.toString());
             success = login_response.getString("success");
+            error=false;
 
         } catch (Exception ex) {
             error = true;
@@ -127,13 +125,16 @@ public class PostStorageDelivery extends AsyncTask<Void, Void, String> {
             Log.d("Entrega", "Datos incorrectos");
         }
         progressDialog.dismiss();
-        if (success.equals("exito")) {
-            Toast.makeText(context, " Entrega Registrada ", Toast.LENGTH_SHORT).show();
+        if(success!=null){
+            if (success.equals("exito")) {
+                Toast.makeText(context, " Entrega Registrada ", Toast.LENGTH_SHORT).show();
 
 
-        } else {
-            Toast.makeText(context, "Error al registrar la Entrega", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "Error al registrar la Entrega", Toast.LENGTH_SHORT).show();
+            }
         }
+
     }
 
     private String get_fecha() {
