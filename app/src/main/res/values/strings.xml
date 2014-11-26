@@ -23,6 +23,11 @@
     <string name="Unidades">Unidades</string>
     <string name="Locacion">Locación</string>
     <string name="Recepcion">Recepción </string>
+    <string name="Empleado">Empleado </string>
+    <string name="Observaciones">Observaciones </string>
+    <string name="Verificada">Verificada </string>
+    <string name="Cancelar">Cancelar </string>
+    <string name="MermaHeader">Razón de perdida</string>
     <string name="storageEntranceButton">Registrar</string>
     <string name="PrimeraEntrada">Primera Entrada</string>
     <string name="CrearOrden">Crear \nOrden</string>
@@ -36,7 +41,6 @@
     <string name="AlmacenListo">Producto \nListo</string>
     <string name="ProductoNombre">Producto:</string>
     <string name="Disponibles">Disponibles:</string>
-
     <string name="ConfirmarOrden">Confirmar\nOrden</string>
     <string name="BorrarProducto">Borrar Producto </string>
     <string name="ConfirmaBorrarProducto">Seguro de borrar este prroducto?</string>
@@ -71,5 +75,6 @@
     <string name="title_activity_purchase">PurchaseActivity</string>
     <string name="title_activity_loss">LossActivity</string>
     <string name="title_activity_order_code">OrderCodeActivity</string>
+    <string name="title_activity_loss_verification">LossVerificationActivity</string>
 
 </resources>
