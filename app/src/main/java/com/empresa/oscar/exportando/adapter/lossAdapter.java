@@ -1,10 +1,7 @@
 package com.empresa.oscar.exportando.adapter;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.empresa.oscar.exportando.object.Loss;
 import com.empresa.oscar.exportando.R;
+import com.empresa.oscar.exportando.object.Loss;
 
 import java.util.ArrayList;
 
@@ -56,11 +53,10 @@ public class lossAdapter extends BaseAdapter
             vi = inflater.inflate(R.layout.loss_list_item, null);
 
             viewhold=new ViewHolderLoss();
-            viewhold.orden_texto=(TextView) vi.findViewById(R.id.orden);
-            viewhold.cantidad_texto=(TextView) vi.findViewById(R.id.cantidad);
+            viewhold.orden_texto=(TextView) vi.findViewById(R.id.order);
+            viewhold.cantidad_texto=(TextView) vi.findViewById(R.id.unidades);
             viewhold.locacion_texto=(TextView) vi.findViewById(R.id.locacion);
             viewhold.fecha_texto=(TextView) vi.findViewById(R.id.fecha);
-            viewhold.tipo_texto=(TextView) vi.findViewById(R.id.tipo);
             viewhold.boton_atender=(Button)vi.findViewById(R.id.atender);
         }
         else{
@@ -69,7 +65,6 @@ public class lossAdapter extends BaseAdapter
 
         Loss ls = items.get(position);
         viewhold.orden_texto.setText(ls.getOrder());
-        viewhold.tipo_texto.setText(ls.getType());
         viewhold.locacion_texto.setText(ls.getLocation());
         viewhold.cantidad_texto.setText(Integer.toString(ls.getAmount()));
         viewhold.fecha_texto.setText(ls.getDate());

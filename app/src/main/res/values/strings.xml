@@ -15,10 +15,13 @@
     <string name="Compra">Compra</string>
     <string name="Orden">Orden</string>
     <string name="Recibido">Recibido </string>
+    <string name="Fecha">Fecha </string>
     <string name="Serial">Serial: </string>
     <string name="Entrega">Entrega </string>
     <string name="Lleno">Lleno: </string>
     <string name="Cantidad">Cantidad</string>
+    <string name="Unidades">Unidades</string>
+    <string name="Locacion">Locación</string>
     <string name="Recepcion">Recepción </string>
     <string name="storageEntranceButton">Registrar</string>
     <string name="PrimeraEntrada">Primera Entrada</string>

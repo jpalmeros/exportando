@@ -9,64 +9,126 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:padding="5dp">
         <TextView
-            android:id="@+id/orden"
+            android:id="@+id/order_header"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/Texto_1"
+            android:text="@string/Orden"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceSmall" />
+
         <TextView
-            android:id="@+id/cantidad"
+            android:id="@+id/order"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Texto_1"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/unidades_header"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:text="@string/Unidades"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:textColor="@color/Texto_1"
             android:textAppearance="?android:attr/textAppearanceSmall" />
         <TextView
-            android:id="@+id/tipo"
+            android:id="@+id/unidades"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:textSize="18sp"
             android:textColor="@color/Texto_1"
-            android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceSmall" />
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
+        android:layout_weight="2"
         android:orientation="vertical"
         android:padding="5dp">
-        <TextView
-            android:id="@+id/locacion"
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:textColor="@color/Texto_1"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-        <TextView
-            android:id="@+id/fecha"
+            android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="2">
+
+            <TextView
+                android:id="@+id/locacion_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Texto_1"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="@string/Locacion"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/locacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Texto_1"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="5dp"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+           </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="2">
+            <TextView
+                android:id="@+id/fecha_header"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Texto_1"
+                android:textStyle="bold"
+                android:text="@string/Fecha"
+                android:textSize="18sp"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/fecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Texto_1"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:textColor="@color/Texto_1"
-            android:textStyle="bold"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            >
+            <Button
+                android:id="@+id/atender"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@color/Boton"
+                android:textColor="@color/Texto_1"
+                android:text="@string/Atender"
+                android:src="@android:drawable/ic_menu_delete" />
+        </LinearLayout>
 
     </LinearLayout>
-    <Button
-        android:id="@+id/atender"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:background="@color/Boton"
-        android:textColor="@color/Texto_1"
-        android:text="@string/Atender"
-        android:onClick="removeAtomPayOnClickHandler"
-        android:src="@android:drawable/ic_menu_delete" />
+
+
 </LinearLayout>

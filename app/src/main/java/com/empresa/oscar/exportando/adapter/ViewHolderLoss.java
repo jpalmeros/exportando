@@ -11,6 +11,5 @@ class ViewHolderLoss {
     TextView cantidad_texto;
     TextView locacion_texto;
     TextView fecha_texto;
-    TextView tipo_texto;
     Button boton_atender;
 }
